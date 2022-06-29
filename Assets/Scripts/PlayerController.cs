@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour
     public float groundCheckRadius;
     public LayerMask groundLayer;
     private bool isGrounded;
+
+    private int jumpCount;
     
     // Start is called before the first frame update
     void Start()
@@ -41,9 +43,14 @@ public class PlayerController : MonoBehaviour
             player.velocity = new Vector2(0, player.velocity.y);
         }
 
-        if (Input.GetButtonDown("Jump") && isGrounded)
+        if (Input.GetButtonDown("Jump") && isGrounded && jumpCount <= 1)
         {
             player.velocity = new Vector2(player.velocity.x, jumpSpeed);
+        }
+
+        while (isGrounded)
+        {
+            jumpCount = 0;
         }
     }
 }
