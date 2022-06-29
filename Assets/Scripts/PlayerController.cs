@@ -8,20 +8,22 @@ public class PlayerController : MonoBehaviour
 {
     public float speed = 5f;
     public float jumpSpeed = 8f;
+    public float doubleJumpSpeed = 4f;
     private float direction = 0f;
     private Rigidbody2D player;
 
     public Transform groundCheck;
     public float groundCheckRadius;
     public LayerMask groundLayer;
-    private bool isGrounded;
+    public bool isGrounded;
 
-    private int jumpCount;
+    public int jumpCount;
     
     // Start is called before the first frame update
     void Start()
     {
         player = GetComponent<Rigidbody2D>();
+        jumpCount = 0;
     }
 
     // Update is called once per frame
@@ -43,14 +45,16 @@ public class PlayerController : MonoBehaviour
             player.velocity = new Vector2(0, player.velocity.y);
         }
 
-        if (Input.GetButtonDown("Jump") && isGrounded && jumpCount <= 1)
+        if (Input.GetButtonDown("Jump") && isGrounded && jumpCount == 0)
         {
             player.velocity = new Vector2(player.velocity.x, jumpSpeed);
+            jumpCount += 1;
         }
-
-        while (isGrounded)
+        else if (Input.GetButtonDown("Jump") && jumpCount == 1)
         {
+            player.velocity = new Vector2(player.velocity.x, doubleJumpSpeed);
             jumpCount = 0;
         }
+        
     }
 }
