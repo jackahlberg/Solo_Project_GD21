@@ -13,7 +13,6 @@ public class PlayerController : MonoBehaviour
     public float doubleJumpSpeed = 4f;
     private float direction = 0f;
     private Rigidbody2D player;
-    [SerializeField] private SpriteRenderer sprite;
 
     public Transform groundCheck;
     public float groundCheckRadius;

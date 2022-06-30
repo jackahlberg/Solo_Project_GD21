@@ -8,6 +8,10 @@ public class DeflectBullet : MonoBehaviour
 {
     public Collider2D playerCol;
     private bool inRange;
+    public float bulletSpeed = 0.01f;
+    private Vector3 shootDirection;
+    private Vector3 target;
+    private bool isBreakable;
     
     
     private void OnTriggerEnter2D(Collider2D playerCol)
@@ -20,22 +24,28 @@ public class DeflectBullet : MonoBehaviour
         inRange = false;
     }
 
-    private void AllowGrab()
+    private void OntriggerEnter2D(Collider2D col)
     {
-
-        if (inRange && Input.GetKeyDown(KeyCode.E))
+        if (!col.CompareTag("Player") && !col.CompareTag("Ground"))
         {
-            Vector3 shootDirection = Input.mousePosition;
-            shootDirection.z = 0f;
-            shootDirection = Camera.main.ScreenToWorldPoint(shootDirection);
-            Debug.Log("Grabbed Item");
-            Debug.Log("ShotDirection: " + shootDirection.x + " " + shootDirection.y);
+            
+        }
+    }
 
+    private void Deflect()
+    {
+        if (inRange && Input.GetKey(KeyCode.Mouse0))
+        {
+            shootDirection = Input.mousePosition;
+            shootDirection = Camera.main.ScreenToWorldPoint(shootDirection);
+            target = (shootDirection - transform.position).normalized;
+            isBreakable = true;
         }
     }
 
     void Update()
     {
-        AllowGrab();
+        Deflect();
+        transform.Translate(target.x * bulletSpeed, target.y * bulletSpeed, 0f, Space.World);
     }
 }
