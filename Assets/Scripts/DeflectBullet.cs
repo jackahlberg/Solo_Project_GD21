@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class DeflectBullet : MonoBehaviour
 {
-    public Collider2D playerCol;
     private bool inRange;
     public float bulletSpeed = 0.01f;
     private Vector3 shootDirection;
@@ -14,21 +13,23 @@ public class DeflectBullet : MonoBehaviour
     private bool isBreakable;
     
     
-    private void OnTriggerEnter2D(Collider2D playerCol)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        inRange = true;
-    }
-
-    private void OnTriggerExit2D(Collider2D playerCol)
-    {
-        inRange = false;
-    }
-
-    private void OntriggerEnter2D(Collider2D col)
-    {
-        if (!col.CompareTag("Player") && !col.CompareTag("Ground"))
+        if (other.CompareTag("Player"))
         {
-            
+            inRange = true;
+        }
+        else if(other.CompareTag("Target") || other.CompareTag("Enemy"))
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D col)
+    {
+        if (col.CompareTag("Player"))
+        {
+            inRange = false;
         }
     }
 
