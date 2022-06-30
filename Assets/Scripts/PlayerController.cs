@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
@@ -11,6 +13,7 @@ public class PlayerController : MonoBehaviour
     public float doubleJumpSpeed = 4f;
     private float direction = 0f;
     private Rigidbody2D player;
+    [SerializeField] private SpriteRenderer sprite;
 
     public Transform groundCheck;
     public float groundCheckRadius;
@@ -18,6 +21,7 @@ public class PlayerController : MonoBehaviour
     public bool isGrounded;
 
     public int jumpCount;
+    private bool facingRight;
     
     // Start is called before the first frame update
     void Start()
@@ -31,30 +35,38 @@ public class PlayerController : MonoBehaviour
     {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
         direction = Input.GetAxis("Horizontal");
+        player.velocity = new Vector2(direction * speed, player.velocity.y);
 
-        if (direction > 0f)
+        if (direction > 0f && facingRight)
         {
-            player.velocity = new Vector2(direction * speed, player.velocity.y);
+            Flip();
         }
-        else if (direction < 0f)
+        else if (direction < 0f && !facingRight)
         {
-            player.velocity = new Vector2(direction * speed, player.velocity.y);
-        }
-        else
-        {
-            player.velocity = new Vector2(0, player.velocity.y);
+            Flip();
         }
 
+        Jumping();
+    }
+
+    private void Jumping()
+    {
         if (Input.GetButtonDown("Jump") && isGrounded && jumpCount == 0)
         {
             player.velocity = new Vector2(player.velocity.x, jumpSpeed);
             jumpCount += 1;
         }
+        //Double Jump
         else if (Input.GetButtonDown("Jump") && jumpCount == 1)
         {
             player.velocity = new Vector2(player.velocity.x, doubleJumpSpeed);
             jumpCount = 0;
         }
-        
+    }
+
+    private void Flip()
+    {
+        facingRight = !facingRight;
+        transform.Rotate(0, 180f, 0);
     }
 }
