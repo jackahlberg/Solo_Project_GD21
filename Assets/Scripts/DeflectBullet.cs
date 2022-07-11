@@ -6,13 +6,11 @@ using UnityEngine;
 
 public class DeflectBullet : MonoBehaviour
 {
-    private bool inRange;
+    [HideInInspector] public bool inRange;
     public float bulletSpeed = 0.01f;
     private Vector3 shootDirection;
     private Vector3 target;
     private bool isBreakable;
-    
-    
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
@@ -35,19 +33,21 @@ public class DeflectBullet : MonoBehaviour
 
     private void Deflect()
     {
-        
-        while (Input.GetKey(KeyCode.Mouse0))
+        if (inRange && Input.GetKey(KeyCode.Mouse0))
         {
-            Time.timeScale = 0.9f;
+            var arrow = FindObjectOfType<ArrowPointer>();
+            arrow.sprite.enabled = true;
+            Time.timeScale = 0.2f;
         }
         
         if (inRange && Input.GetKeyUp(KeyCode.Mouse0))
         {
+            var arrow = FindObjectOfType<ArrowPointer>();
+            arrow.sprite.enabled = false;
             Time.timeScale = 1f;
             shootDirection = Input.mousePosition;
             shootDirection = Camera.main.ScreenToWorldPoint(shootDirection);
             target = (shootDirection - transform.position).normalized;
-            isBreakable = true;
         }
     }
 
