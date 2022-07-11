@@ -35,8 +35,15 @@ public class DeflectBullet : MonoBehaviour
 
     private void Deflect()
     {
-        if (inRange && Input.GetKey(KeyCode.Mouse0))
+        
+        while (Input.GetKey(KeyCode.Mouse0))
         {
+            Time.timeScale = 0.9f;
+        }
+        
+        if (inRange && Input.GetKeyUp(KeyCode.Mouse0))
+        {
+            Time.timeScale = 1f;
             shootDirection = Input.mousePosition;
             shootDirection = Camera.main.ScreenToWorldPoint(shootDirection);
             target = (shootDirection - transform.position).normalized;
