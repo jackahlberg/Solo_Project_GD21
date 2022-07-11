@@ -11,7 +11,7 @@ public class InstantiateBullet : MonoBehaviour
 
     private void Start()
     {
-        InvokeRepeating(Instantiate(3, 0f));
+        InvokeRepeating(Instantiate(3f, 3f,));
     }
 
     private void Instantiate()
