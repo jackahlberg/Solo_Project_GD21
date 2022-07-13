@@ -97,6 +97,7 @@ GameObject:
   - component: {fileID: 2147538063370531092}
   - component: {fileID: 2147538063370531094}
   - component: {fileID: 2147538063370531093}
+  - component: {fileID: -2493765135436071016}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -206,16 +207,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 714a998485abe8f48abf751ec6981b83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputManager: {fileID: -2493765135436071016}
   speed: 5
-  jumpSpeed: 8
-  doubleJumpSpeed: 8
+  jumpForce: 8
+  doubleJumpForce: 4
+  canDoubleJump: 1
+  rollSprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
+  mainSprite: {fileID: -9095717837082945937, guid: bd3cb4af8406d4436a2ae8c2aafe1f8d, type: 3}
   groundCheck: {fileID: 2147538063370531091}
   groundCheckRadius: 1
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  roofLayer:
+    serializedVersion: 2
+    m_Bits: 128
   isGrounded: 0
-  jumpCount: 0
+  underRoof: 0
 --- !u!70 &2147538063370531093
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -232,6 +240,21 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 2}
   m_Direction: 0
+--- !u!114 &-2493765135436071016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2147538063370531103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7fb3bec715fbcf49879422899f1a3af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  walkInput: 0
+  crouchInput: 0
+  exitCrouchInput: 0
 --- !u!1 &2147538063818326182
 GameObject:
   m_ObjectHideFlags: 0

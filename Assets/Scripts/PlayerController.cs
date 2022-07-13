@@ -1,24 +1,25 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Unity.Mathematics;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
-using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
-    [HideInInspector] public float speed = 5f;
-    public float jumpSpeed = 8f;
-    public float doubleJumpSpeed = 4f;
-    private int jumpCount;
-    private bool facingRight;
-    private float direction = 0f;
+    [SerializeField] private InputManager inputManager;
     
-    private Rigidbody2D player;
-    private SpriteRenderer spriteRenderer;
-    private CircleCollider2D crouchCollider;
-    private CapsuleCollider2D mainCollider;
+    public float speed = 5f;
+    public float jumpForce = 8f;
+    public float doubleJumpForce = 4f;
+    private int _jumpCount;
+    private bool _isOnWall;
+    
+    private bool _facingRight;
+    private Rigidbody2D _player;
+    private SpriteRenderer _spriteRenderer;
+    private CircleCollider2D _crouchCollider;
+    private CapsuleCollider2D _mainCollider;
     [SerializeField] private Sprite rollSprite;
     [SerializeField] private Sprite mainSprite;
 
@@ -26,75 +27,110 @@ public class PlayerController : MonoBehaviour
     public float groundCheckRadius;
     public LayerMask groundLayer;
     public LayerMask roofLayer;
-    public float roofCheckRadius;
     public bool isGrounded;
     public bool underRoof;
     void Start()
     {
-        player = GetComponent<Rigidbody2D>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        crouchCollider = GetComponent<CircleCollider2D>();
-        mainCollider = GetComponent<CapsuleCollider2D>();
-        jumpCount = 0;
+        _player = GetComponent<Rigidbody2D>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _crouchCollider = GetComponent<CircleCollider2D>();
+        _mainCollider = GetComponent<CapsuleCollider2D>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
         underRoof = Physics2D.Raycast(groundCheck.position, Vector2.up, 3f, roofLayer);
-        direction = Input.GetAxis("Horizontal");
-        player.velocity = new Vector2(direction * speed, player.velocity.y);
-
-        if (direction > 0f && facingRight)
-        {
-            Flip();
-        }
-        else if (direction < 0f && !facingRight)
-        {
-            Flip();
-        }
-
-        Jumping();
+        
+        Move();
+        Jump();
         Roll();
+        Flip();
+        WallJump();
     }
 
-    private void Jumping()
+    private void Move()
     {
-        if (Input.GetButtonDown("Jump") && isGrounded && jumpCount == 0)
+        _player.velocity = new Vector2(inputManager.walkInput * speed, _player.velocity.y); 
+    }
+
+    private void Jump()
+    {
+        if (inputManager.jumpInput && isGrounded && _jumpCount == 0 && !_isOnWall)
         {
-            player.velocity = new Vector2(player.velocity.x, jumpSpeed);
-            jumpCount += 1;
+            _player.velocity = new Vector2(_player.velocity.x, jumpForce);
+            _jumpCount += 1;
         }
         //Double Jump
-        else if (Input.GetButtonDown("Jump") && jumpCount == 1)
+        else if (inputManager.jumpInput && _jumpCount == 1 && !_isOnWall)
         {
-            player.velocity = new Vector2(player.velocity.x, doubleJumpSpeed);
-            jumpCount = 0;
+            _player.velocity = new Vector2(_player.velocity.x, doubleJumpForce);
+            _jumpCount = 0;
         }
     }
 
     private void Flip()
     {
-        facingRight = !facingRight;
-        transform.Rotate(0, 180f, 0);
+        if (inputManager.walkInput > 0f && _facingRight)
+        {
+            _facingRight = !_facingRight;
+            transform.Rotate(0, 180f, 0);
+        }
+        else if (inputManager.walkInput < 0f && !_facingRight)
+        {
+            _facingRight = !_facingRight;
+            transform.Rotate(0, 180f, 0);
+            
+        }
     }
 
     private void Roll()
     {
-        if (Input.GetKeyDown(KeyCode.LeftControl) && isGrounded)
+        if (inputManager.rollhInput && isGrounded)
         {
-            spriteRenderer.sprite = rollSprite;
-            crouchCollider.enabled = true;
-            mainCollider.enabled = false;
+            _spriteRenderer.sprite = rollSprite;
+            _crouchCollider.enabled = true;
+            _mainCollider.enabled = false;
             speed = 3f;
         }
-        else if (!Input.GetKey(KeyCode.LeftControl) && !underRoof)
+        else if (!inputManager.exitRollInput && !underRoof)
         {
-            spriteRenderer.sprite = mainSprite;
-            crouchCollider.enabled = false;
-            mainCollider.enabled = true;
+            _spriteRenderer.sprite = mainSprite;
+            _crouchCollider.enabled = false;
+            _mainCollider.enabled = true;
             speed = 5f;
         }
+    }
+
+    private void WallJump()
+    {
+        if (_isOnWall && inputManager.jumpInput)
+        {
+            _player.velocity = new Vector2(inputManager.walkInput, jumpForce);
+            _jumpCount = 0;
+        }
+    }
+
+    private void OnCollisionStay2D(Collision2D col)
+    {
+        if (col.collider.gameObject.layer == LayerMask.NameToLayer("Wall"))
+        {
+            _player.velocity = Vector2.zero;
+            _isOnWall = true;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D other)
+    {
+        if (other.collider.gameObject.layer == LayerMask.NameToLayer("Wall"))
+        {
+            StartCoroutine(WallJumpTimer());
+        }
+    }
+
+    IEnumerator WallJumpTimer()
+    {
+        yield return new WaitForSeconds(0.5f);
+        _isOnWall = false;
     }
 }
