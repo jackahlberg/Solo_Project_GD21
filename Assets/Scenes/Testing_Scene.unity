@@ -319,7 +319,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 108955033}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 4.5, y: 0.6, z: 0}
+  m_LocalPosition: {x: 5.5, y: 0.6, z: 0}
   m_LocalScale: {x: 1, y: 7, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -385,7 +385,7 @@ GameObject:
   - component: {fileID: 526399589}
   - component: {fileID: 526399588}
   - component: {fileID: 526399587}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Wall (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1200,6 +1200,10 @@ PrefabInstance:
       propertyPath: rollSprite
       value: 
       objectReference: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
+    - target: {fileID: 2147538063370531094, guid: 2e24b7114d145084db7c6c9a976ecfbe, type: 3}
+      propertyPath: doubleJumpForce
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 2147538063370531094, guid: 2e24b7114d145084db7c6c9a976ecfbe, type: 3}
       propertyPath: roofCheckRadius
       value: -1
