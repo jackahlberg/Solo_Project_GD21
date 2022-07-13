@@ -11,6 +11,8 @@ public class DeflectBullet : MonoBehaviour
     private Vector3 shootDirection;
     private Vector3 target;
     private bool isBreakable;
+    public float setSlowDown;
+    
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
@@ -37,7 +39,7 @@ public class DeflectBullet : MonoBehaviour
         {
             var arrow = FindObjectOfType<ArrowPointer>();
             arrow.sprite.enabled = true;
-            Time.timeScale = 0.2f;
+            Time.timeScale = setSlowDown;
         }
         
         if (inRange && Input.GetKeyUp(KeyCode.Mouse0))

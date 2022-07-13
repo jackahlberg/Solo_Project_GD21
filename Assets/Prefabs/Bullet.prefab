@@ -118,6 +118,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inRange: 0
   bulletSpeed: 0.1
+  setSlowDown: 0.05
 --- !u!114 &5753768293530047373
 MonoBehaviour:
   m_ObjectHideFlags: 0
