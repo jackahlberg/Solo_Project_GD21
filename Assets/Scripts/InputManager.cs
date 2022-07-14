@@ -7,6 +7,7 @@ public class InputManager : MonoBehaviour
     public float walkInput;
     public bool rollhInput;
     public bool exitRollInput;
+    public bool dashInput;
     public bool jumpInput;
     void Update()
     {
@@ -18,6 +19,7 @@ public class InputManager : MonoBehaviour
         walkInput = Input.GetAxis("Horizontal");
         rollhInput = Input.GetKeyDown(KeyCode.LeftControl);
         exitRollInput = Input.GetKey(KeyCode.LeftControl);
-        jumpInput = Input.GetButtonDown("Jump");
+        dashInput = Input.GetKeyDown(KeyCode.LeftShift);
+        jumpInput = Input.GetButtonDown("Jump"); // Remove this when new jumo is implemented
     }
 }

@@ -18,8 +18,7 @@ public class PlayerController : MonoBehaviour
     private bool _facingRight;
     private Rigidbody2D _player;
     private SpriteRenderer _spriteRenderer;
-    private CircleCollider2D _crouchCollider;
-    private CapsuleCollider2D _mainCollider;
+    private CircleCollider2D _playerCol;
     [SerializeField] private Sprite rollSprite;
     [SerializeField] private Sprite mainSprite;
 
@@ -33,40 +32,45 @@ public class PlayerController : MonoBehaviour
     {
         _player = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        _crouchCollider = GetComponent<CircleCollider2D>();
-        _mainCollider = GetComponent<CapsuleCollider2D>();
+        _playerCol = GetComponent<CircleCollider2D>();
     }
 
     void Update()
     {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
         underRoof = Physics2D.Raycast(groundCheck.position, Vector2.up, 3f, roofLayer);
+
+        float x = inputManager.walkInput;
+        float y = _player.velocity.y;
+        Vector2 dir = new Vector2(x, y);
         
-        Move();
+        Dash();
+        Walk(dir);
         Jump();
         Roll();
         Flip();
         WallJump();
     }
 
-    private void Move()
+    private void Walk(Vector2 dir)
     {
-        _player.velocity = new Vector2(inputManager.walkInput * speed, _player.velocity.y); 
+        _player.velocity = new Vector2(dir.x * speed, _player.velocity.y); 
     }
 
     private void Jump()
     {
-        if (inputManager.jumpInput && isGrounded && _jumpCount == 0 && !_isOnWall)
+        if (inputManager.jumpInput && isGrounded && !_isOnWall)
         {
-            _player.velocity = new Vector2(_player.velocity.x, jumpForce);
+            _player.velocity = new Vector2(_player.velocity.x, 0f);
+            _player.velocity += Vector2.up * jumpForce;
             _jumpCount += 1;
         }
         //Double Jump
-        else if (inputManager.jumpInput && _jumpCount == 1 && !_isOnWall)
+        /*else if (inputManager.jumpInput && _jumpCount == 1 && !_isOnWall)
         {
             _player.velocity = new Vector2(_player.velocity.x, doubleJumpForce);
             _jumpCount = 0;
-        }
+        }*/
     }
 
     private void Flip()
@@ -74,13 +78,13 @@ public class PlayerController : MonoBehaviour
         if (inputManager.walkInput > 0f && _facingRight)
         {
             _facingRight = !_facingRight;
-            transform.Rotate(0, 180f, 0);
+            _spriteRenderer.flipX = false;
         }
         else if (inputManager.walkInput < 0f && !_facingRight)
         {
             _facingRight = !_facingRight;
-            transform.Rotate(0, 180f, 0);
-            
+            _spriteRenderer.flipX = true;
+
         }
     }
 
@@ -89,15 +93,13 @@ public class PlayerController : MonoBehaviour
         if (inputManager.rollhInput && isGrounded)
         {
             _spriteRenderer.sprite = rollSprite;
-            _crouchCollider.enabled = true;
-            _mainCollider.enabled = false;
+            _playerCol.radius = 0.048f;
             speed = 3f;
         }
         else if (!inputManager.exitRollInput && !underRoof)
         {
             _spriteRenderer.sprite = mainSprite;
-            _crouchCollider.enabled = false;
-            _mainCollider.enabled = true;
+            _playerCol.radius = 0.1f;
             speed = 5f;
         }
     }
@@ -130,7 +132,16 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator WallJumpTimer()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.25f);
         _isOnWall = false;
+    }
+
+    private void Dash()
+    {
+        if (inputManager.dashInput)
+        {
+            Debug.Log("Dash");
+            //_player.velocity = new Vector2(); FIX THIS LATER
+        }
     }
 }
