@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     private int _jumpCount;
     private bool _isOnWall;
     private bool _isDashing;
+    private bool _canDash;
     
     private bool _facingRight;
     private Rigidbody2D _player;
@@ -64,6 +65,14 @@ public class PlayerController : MonoBehaviour
         WallJump();
     }
 
+    private void FixedUpdate()
+    {
+        if (isGrounded)
+        {
+            _canDash = true;
+        }
+    }
+
     private void Walk(Vector2 dir)
     {
         if (_isDashing)
@@ -99,6 +108,7 @@ public class PlayerController : MonoBehaviour
             _player.velocity = new Vector2(_player.velocity.x, 0f);
             _player.velocity += Vector2.up * jumpForce;
             _jumpCount += 1;
+            _canDash = false;
         }
         //Double Jump
         /*else if (inputManager.jumpInput && _jumpCount == 1 && !_isOnWall)
@@ -151,19 +161,15 @@ public class PlayerController : MonoBehaviour
         {
             _player.velocity = Vector2.zero;
             _isOnWall = true;
-            _animator.SetBool("IsOnWall", true);
-            _spriteRenderer.flipX = true;
         }
     }
 
     private void OnCollisionExit2D(Collision2D other)
     {
-        _animator.SetBool("IsOnWall", false);
         
         if (other.collider.gameObject.layer == LayerMask.NameToLayer("Wall"))
         {
             StartCoroutine(WallJumpTimer());
-            _spriteRenderer.flipX = false;
         }
     }
 
