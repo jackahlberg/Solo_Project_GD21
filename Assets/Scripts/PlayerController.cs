@@ -37,12 +37,30 @@ public class PlayerController : MonoBehaviour
         _playerCol = GetComponent<CircleCollider2D>();
         _betterJump = GetComponent<BetterJump>();
         _animator = GetComponent<Animator>();
+        _canDash = true;
     }
 
     void Update()
     {
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+
+        var x = inputManager.walkInput;
+        var y = inputManager.jumpInput;
+        var dir = new Vector2(x, y);
+        
+        SurfaceChecks();
+        Dash(x, y);
+        Glide();
+        Walk(dir);
+        Jump();
+        Roll();
+        Flip();
+        WallJump();
+    }
+
+    private void SurfaceChecks()
+    {
         underRoof = Physics2D.Raycast(groundCheck.position, Vector2.up, 3f, roofLayer);
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
 
         if (isGrounded)
         {
@@ -51,25 +69,6 @@ public class PlayerController : MonoBehaviour
         else
         {
             _animator.SetBool("IsGrounded", false);
-        }
-        
-        var x = inputManager.walkInput;
-        var y = inputManager.jumpInput;
-        var dir = new Vector2(x, y);
-        
-        Dash(x, y);
-        Walk(dir);
-        Jump();
-        Roll();
-        Flip();
-        WallJump();
-    }
-
-    private void FixedUpdate()
-    {
-        if (isGrounded)
-        {
-            _canDash = true;
         }
     }
 
@@ -108,7 +107,6 @@ public class PlayerController : MonoBehaviour
             _player.velocity = new Vector2(_player.velocity.x, 0f);
             _player.velocity += Vector2.up * jumpForce;
             _jumpCount += 1;
-            _canDash = false;
         }
         //Double Jump
         /*else if (inputManager.jumpInput && _jumpCount == 1 && !_isOnWall)
@@ -137,7 +135,7 @@ public class PlayerController : MonoBehaviour
         if (inputManager.rollhInput && isGrounded)
         {
             _animator.SetBool("IsRolling",true);
-            transform.localScale = new Vector3(5.5f, 5.5f, 1);
+            transform.localScale = new Vector3(9f, 9f, 1);
         }
         else if (!inputManager.exitRollInput && !underRoof)
         {
@@ -181,7 +179,7 @@ public class PlayerController : MonoBehaviour
 
     private void Dash(float x, float y)
     {
-        if (inputManager.dashInput)
+        if (inputManager.dashInput && _canDash)
         {
             _player.velocity = Vector2.zero;
             Vector2 dir = new Vector2(x, y);
@@ -196,11 +194,49 @@ public class PlayerController : MonoBehaviour
         _player.gravityScale = 0f;
         _betterJump.enabled = false;
         _isDashing = true;
+        _canDash = false;
 
         yield return new WaitForSeconds(0.2f);
 
         _isDashing = false;
         _player.gravityScale = 2.6f;
         _betterJump.enabled = true;
+
+        yield return new WaitForSeconds(1f);
+
+        if (isGrounded)
+        {
+            _canDash = true;
+        }
+        else if (!isGrounded)
+        {
+            while (!isGrounded)
+            {
+                yield return this;
+            }
+
+            _canDash = true;
+        }
+
+    }
+
+    private void Glide()
+    {
+        if (Input.GetKey(KeyCode.Mouse1))
+        {
+            if (Input.GetKeyDown(KeyCode.Mouse1))
+            {
+                _player.velocity = Vector2.zero;
+            }
+            _player.gravityScale = 0.2f;
+            _betterJump.enabled = false;
+        }
+
+        if (Input.GetKeyUp(KeyCode.Mouse1))
+        {
+            _player.gravityScale = 2.6f;
+            _betterJump.enabled = true;
+        }
+
     }
 }
