@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
     private bool _isOnWall;
     private bool _isDashing;
     private bool _canDash;
-    
+
     private bool _facingRight;
     private Rigidbody2D _player;
     private SpriteRenderer _spriteRenderer;
@@ -30,6 +30,11 @@ public class PlayerController : MonoBehaviour
     public LayerMask roofLayer;
     public bool isGrounded;
     public bool underRoof;
+    public float _groundedRememberTime;
+    private float _coyoteTime;
+    public float _jumpRememberTime;
+    private float _jumpRemember;
+    
     void Start()
     {
         _player = GetComponent<Rigidbody2D>();
@@ -62,13 +67,21 @@ public class PlayerController : MonoBehaviour
         underRoof = Physics2D.Raycast(groundCheck.position, Vector2.up, 3f, roofLayer);
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
 
+        _coyoteTime -= Time.deltaTime;
         if (isGrounded)
         {
             _animator.SetBool("IsGrounded", true);
+            _coyoteTime = _groundedRememberTime;
         }
         else
         {
             _animator.SetBool("IsGrounded", false);
+        }
+
+        _jumpRemember -= Time.deltaTime;
+        if (Input.GetButtonDown("Jump"))
+        {
+            _jumpRemember = _jumpRememberTime;
         }
     }
 
@@ -91,7 +104,7 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
-
+        
         if (_player.velocity.y > 0)
         {
             _animator.SetFloat("JumpVelocity", 1);
@@ -99,15 +112,14 @@ public class PlayerController : MonoBehaviour
         else if (_player.velocity.y < 0)
         {
             _animator.SetFloat("JumpVelocity", -1);
-
         }
         
-        if (Input.GetButtonDown("Jump") && isGrounded && !_isOnWall)
+        if ((_coyoteTime > 0) && (_jumpRemember > 0) && !_isOnWall)
         {
-            _player.velocity = new Vector2(_player.velocity.x, 0f);
-            _player.velocity += Vector2.up * jumpForce;
+            _player.velocity = new Vector2(_player.velocity.x, jumpForce);
             _jumpCount += 1;
         }
+        
         //Double Jump
         /*else if (inputManager.jumpInput && _jumpCount == 1 && !_isOnWall)
         {

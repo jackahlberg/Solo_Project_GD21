@@ -223,6 +223,8 @@ MonoBehaviour:
     m_Bits: 128
   isGrounded: 0
   underRoof: 0
+  _groundedRememberTime: 0.2
+  _jumpRememberTime: 0.25
 --- !u!114 &1413371432439880812
 MonoBehaviour:
   m_ObjectHideFlags: 0
