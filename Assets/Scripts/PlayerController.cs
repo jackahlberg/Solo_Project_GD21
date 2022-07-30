@@ -13,10 +13,13 @@ public class PlayerController : MonoBehaviour
     public float jumpForce = 8f;
     public float doubleJumpForce = 4f;
     private int _jumpCount;
+    public float slideSpeed;
     private bool _isOnWall;
     private bool _isDashing;
     private bool _canDash;
-
+    private bool _hasWallJumped;
+    private float _rollInterpolator;
+    
     private bool _facingRight;
     private Rigidbody2D _player;
     private SpriteRenderer _spriteRenderer;
@@ -59,7 +62,7 @@ public class PlayerController : MonoBehaviour
         Jump();
         Roll();
         Flip();
-        WallJump();
+        WallJump(dir);
     }
 
     private void SurfaceChecks()
@@ -88,6 +91,11 @@ public class PlayerController : MonoBehaviour
     private void Walk(Vector2 dir)
     {
         if (_isDashing)
+        {
+            return;
+        }
+        
+        if (_hasWallJumped)
         {
             return;
         }
@@ -148,20 +156,26 @@ public class PlayerController : MonoBehaviour
         {
             _animator.SetBool("IsRolling",true);
             transform.localScale = new Vector3(9f, 9f, 1);
+            speed = Mathf.Lerp(4f, 12f, _rollInterpolator);
+            _rollInterpolator += 0.5f * Time.deltaTime;
         }
-        else if (!inputManager.exitRollInput && !underRoof)
+        else if (!inputManager.exitRollInput && !underRoof || _isOnWall)
         {
             _animator.SetBool("IsRolling",false);
             transform.localScale = new Vector3(11,11,1);
+            speed = 8f;
+            _rollInterpolator = 0f;
         }
     }
 
-    private void WallJump()
+    private void WallJump(Vector2 dir)
     {
-        if (_isOnWall && Input.GetButtonDown("Jump"))
+        if (_isOnWall && Input.GetButtonDown("Jump") && _player.velocity.x < 0f || _isOnWall && Input.GetButtonDown("Jump") && 0f < _player.velocity.x)
         {
-            _player.velocity = new Vector2(inputManager.walkInput, jumpForce);
+            _player.velocity = new Vector2(dir.x * speed * 3.6f, jumpForce);
             _jumpCount = 0;
+            _hasWallJumped = true;
+            StartCoroutine(WallJumpTimer());
         }
     }
 
@@ -169,8 +183,9 @@ public class PlayerController : MonoBehaviour
     {
         if (col.collider.gameObject.layer == LayerMask.NameToLayer("Wall"))
         {
-            _player.velocity = Vector2.zero;
+            _player.velocity = new Vector2(_player.velocity.x, slideSpeed * Time.deltaTime);
             _isOnWall = true;
+            _animator.SetBool("IsOnWall", true);
         }
     }
 
@@ -179,7 +194,9 @@ public class PlayerController : MonoBehaviour
         
         if (other.collider.gameObject.layer == LayerMask.NameToLayer("Wall"))
         {
+            _canDash = true;
             StartCoroutine(WallJumpTimer());
+            _animator.SetBool("IsOnWall", false);
         }
     }
 
@@ -187,6 +204,10 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(0.25f);
         _isOnWall = false;
+
+        yield return new WaitForSeconds(0.25f);
+            
+        _hasWallJumped = false;
     }
 
     private void Dash(float x, float y)
