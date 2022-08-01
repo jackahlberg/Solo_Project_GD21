@@ -259,14 +259,15 @@ public class PlayerController : MonoBehaviour
 
     private void Glide()
     {
-        if (Input.GetKey(KeyCode.Mouse1))
+        if (Input.GetKeyDown(KeyCode.Mouse1))
         {
-            if (Input.GetKeyDown(KeyCode.Mouse1))
-            {
-                _player.velocity = Vector2.zero;
-            }
-            _player.gravityScale = 0.2f;
             _betterJump.enabled = false;
+            _player.velocity = new Vector2(0f, -1f);
+
+            if (Input.GetKey(KeyCode.Mouse1))
+            {
+                _player.gravityScale = 0.2f;
+            }
         }
 
         if (Input.GetKeyUp(KeyCode.Mouse1))
