@@ -156,7 +156,7 @@ public class PlayerController : MonoBehaviour
         {
             _animator.SetBool("IsRolling",true);
             transform.localScale = new Vector3(9f, 9f, 1);
-            if (_player.velocity.x > 0)
+            if (_player.velocity.x > 0 || _player.velocity.x < 0)
             {
                 speed = Mathf.Lerp(4f, 12f, _rollInterpolator);
                 _rollInterpolator += 0.4f * Time.deltaTime;
@@ -176,7 +176,7 @@ public class PlayerController : MonoBehaviour
     {
         if (_isOnWall && Input.GetButtonDown("Jump") && _player.velocity.x < 0f || _isOnWall && Input.GetButtonDown("Jump") && 0f < _player.velocity.x)
         {
-            _player.velocity = new Vector2(dir.x * speed * 3.6f, jumpForce);
+            _player.velocity = new Vector2((dir.x * 2) * speed * 2.5f, jumpForce);
             _jumpCount = 0;
             _hasWallJumped = true;
             StartCoroutine(WallJumpTimer());
