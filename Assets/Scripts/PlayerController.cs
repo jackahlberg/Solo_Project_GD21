@@ -156,8 +156,12 @@ public class PlayerController : MonoBehaviour
         {
             _animator.SetBool("IsRolling",true);
             transform.localScale = new Vector3(9f, 9f, 1);
-            speed = Mathf.Lerp(4f, 12f, _rollInterpolator);
-            _rollInterpolator += 0.5f * Time.deltaTime;
+            if (_player.velocity.x > 0)
+            {
+                speed = Mathf.Lerp(4f, 12f, _rollInterpolator);
+                _rollInterpolator += 0.4f * Time.deltaTime;
+            }
+
         }
         else if (!inputManager.exitRollInput && !underRoof || _isOnWall)
         {
