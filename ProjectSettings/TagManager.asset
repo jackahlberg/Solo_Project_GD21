@@ -6,18 +6,21 @@ TagManager:
   tags:
   - Ground
   - Target
+  - Bullet
   - Enemy
+  - Enemy
+  - Key
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Bullet
   - Water
   - UI
   - Ground
   - Roof
   - Wall
-  - 
+  - Bullet
   - 
   - 
   - 
