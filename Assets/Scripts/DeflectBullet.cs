@@ -38,7 +38,7 @@ public class DeflectBullet : MonoBehaviour
 
     IEnumerator WaitToDestroy()
     {
-        yield return new WaitForSeconds(0.06f);
+        yield return new WaitForSeconds(0.06f); 
         Destroy(gameObject);
     }
 

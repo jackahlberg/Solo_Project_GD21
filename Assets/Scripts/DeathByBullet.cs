@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using System.Security.Cryptography;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -10,9 +11,12 @@ public class DeathByBullet : MonoBehaviour
     private GameObject _me;
     private GameObject _bullet;
 
+    private DeathOnCollision _checkpoint;
+
     private void Start()
     {
         _me = gameObject;
+        _checkpoint = GetComponent<DeathOnCollision>();
     }
 
     private void OnTriggerEnter2D(Collider2D col)
@@ -35,7 +39,8 @@ public class DeathByBullet : MonoBehaviour
         
         if (Vector2.Distance(_bullet.transform.position, _me.transform.position) < 1.5f)
         {
-            Destroy(gameObject);
+            transform.position = _checkpoint.respawnPoint;
+            Destroy(_bullet);
         }
     }
 }
