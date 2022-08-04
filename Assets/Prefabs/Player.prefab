@@ -102,6 +102,7 @@ GameObject:
   - component: {fileID: 2144392849109270548}
   - component: {fileID: 1617863663230134102}
   - component: {fileID: -3105404439649561801}
+  - component: {fileID: -2157748431733825308}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -215,6 +216,7 @@ MonoBehaviour:
   jumpForce: 15
   doubleJumpForce: 8
   slideSpeed: 1
+  glideSpeed: 300
   groundCheck: {fileID: 2147538063370531091}
   groundCheckRadius: 1.15
   groundLayer:
@@ -321,6 +323,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2516da56a98b64b40aac36094c902f4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-2157748431733825308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2147538063370531103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4e3518088991f44a8e34bfd99cb5a56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  respawnPoint: {x: 0, y: 0, z: 0}
 --- !u!1 &2147538063818326182
 GameObject:
   m_ObjectHideFlags: 0

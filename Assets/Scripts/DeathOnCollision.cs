@@ -4,13 +4,23 @@ using UnityEngine.SceneManagement;
 
 public class DeathOnCollision : MonoBehaviour
 {
-    
+
+    public Vector3 respawnPoint;
+
+    private void Start()
+    {
+        respawnPoint = transform.position;
+    }
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.CompareTag("Player"))
+        if (col.CompareTag("Checkpoint"))
         {
-            SceneManager.LoadScene("Platforming_Level");
+            respawnPoint = transform.position;
+        }
+        else if (col.CompareTag("Spike"))
+        {
+            transform.position = respawnPoint;
         }
     }
 }

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using Cinemachine;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -14,10 +15,12 @@ public class PlayerController : MonoBehaviour
     public float doubleJumpForce = 4f;
     private int _jumpCount;
     public float slideSpeed;
+    public float glideSpeed;
     private bool _isOnWall;
     private bool _isDashing;
     private bool _canDash;
     private bool _hasWallJumped;
+    private bool _isGliding;
     private float _rollInterpolator;
     
     private bool _facingRight;
@@ -193,9 +196,16 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void OnTriggerStay2D(Collider2D col)
+    {
+        if (col.CompareTag("Wind") && _isGliding)
+        {
+            _player.velocity = new Vector2(_player.velocity.x, glideSpeed * Time.deltaTime);
+        }
+    }
+
     private void OnCollisionExit2D(Collision2D other)
     {
-        
         if (other.collider.gameObject.layer == LayerMask.NameToLayer("Wall"))
         {
             _canDash = true;
@@ -262,11 +272,12 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
             _betterJump.enabled = false;
+            _isGliding = true;
             _player.velocity = new Vector2(0f, -1f);
 
             if (Input.GetKey(KeyCode.Mouse1))
             {
-                _player.gravityScale = 0.2f;
+                _player.gravityScale = 0.4f;
             }
         }
 
@@ -274,6 +285,7 @@ public class PlayerController : MonoBehaviour
         {
             _player.gravityScale = 2.6f;
             _betterJump.enabled = true;
+            _isGliding = false;
         }
 
     }

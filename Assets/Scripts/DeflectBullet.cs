@@ -29,7 +29,7 @@ public class DeflectBullet : MonoBehaviour
         {
             inRange = true;
         }
-        else if(other.CompareTag("Bullet") || other.CompareTag("Key") || other.CompareTag("Target") || other.gameObject.layer == 8 || other.CompareTag("Enemy"))
+        else if(other.CompareTag("Bullet") || other.CompareTag("Key") || other.CompareTag("Target") || other.CompareTag("Enemy"))
         {
             StartCoroutine(WaitToDestroy());
         }
@@ -38,7 +38,7 @@ public class DeflectBullet : MonoBehaviour
 
     IEnumerator WaitToDestroy()
     {
-        yield return new WaitForSeconds(0.03f);
+        yield return new WaitForSeconds(0.06f);
         Destroy(gameObject);
     }
 

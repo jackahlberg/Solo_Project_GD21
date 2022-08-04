@@ -32,7 +32,7 @@ public class EnemyFollowPlayer : MonoBehaviour
 
     private void MoveTowards()
     {
-        if (Vector2.Distance(me.transform.position, _player.transform.position) < 2f)
+        if (Vector2.Distance(me.transform.position, _player.transform.position) < 2f || Vector2.Distance(me.transform.position, _player.transform.position) > 20f)
         {
             return;
         }
