@@ -11,7 +11,7 @@ public class InstantiateBullet : MonoBehaviour
     private void Start()
     {
         _enemy = GetComponent<Transform>();
-        InvokeRepeating("Instantiate", 3f, 2f);
+        InvokeRepeating("Instantiate", 1.5f, 2.5f);
     }
 
     private void Instantiate()

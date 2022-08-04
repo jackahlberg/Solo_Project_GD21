@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 5231347921235918647}
   - component: {fileID: 5231347921235918643}
   - component: {fileID: 5231347921235918644}
+  - component: {fileID: -9175987146618190302}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -99,10 +100,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e0e56327f96abf44b65aea8eceb6f0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpHeight: 6
-  speed: 2
+  jumpHeight: 8
+  speed: 5
   me: {fileID: 5231347921235918643}
-  groundCheckRadius: 1
+  groundCheckDistance: 1.1
   _isGrounded: 0
   groundLayer:
     serializedVersion: 2
@@ -144,3 +145,15 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 2}
   m_Direction: 0
+--- !u!114 &-9175987146618190302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5231347921235918648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2516da56a98b64b40aac36094c902f4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
