@@ -35,7 +35,7 @@ public class DeathByBullet : MonoBehaviour
 
     IEnumerator DeflectCheck()
     {
-        yield return new WaitForSeconds(0.15f);
+        yield return new WaitForSeconds(0.25f);
         
         if (Vector2.Distance(_bullet.transform.position, _me.transform.position) < 1.5f)
         {
