@@ -16,7 +16,7 @@ public class InputManager : MonoBehaviour
 
     private void GetInput()
     {
-        walkInput = Input.GetAxis("Horizontal");
+        walkInput = Input.GetAxisRaw("Horizontal");
         rollhInput = Input.GetKey(KeyCode.LeftControl);
         exitRollInput = Input.GetKey(KeyCode.LeftControl);
         dashInput = Input.GetKeyDown(KeyCode.LeftShift);

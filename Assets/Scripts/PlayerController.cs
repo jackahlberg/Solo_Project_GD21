@@ -179,7 +179,7 @@ public class PlayerController : MonoBehaviour
     {
         if (_isOnWall && Input.GetButtonDown("Jump") && _player.velocity.x < 0f || _isOnWall && Input.GetButtonDown("Jump") && 0f < _player.velocity.x)
         {
-            _player.velocity = new Vector2((dir.x * 2) * speed * 2.5f, jumpForce);
+            _player.velocity = new Vector2((dir.x * 2) * speed * 0.7f, jumpForce);
             _jumpCount = 0;
             _hasWallJumped = true;
             StartCoroutine(WallJumpTimer());
