@@ -219,6 +219,7 @@ MonoBehaviour:
   doubleJumpForce: 8
   slideSpeed: 1
   glideSpeed: 300
+  weapon: {fileID: 0}
   groundCheck: {fileID: 2147538063370531091}
   groundCheckRadius: 1.15
   groundLayer:
@@ -263,6 +264,8 @@ MonoBehaviour:
   dashInput: 0
   jumpInput: 0
   attackInput: 0
+  upInput: 0
+  downInput: 0
 --- !u!58 &-4387044381236773618
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -353,8 +356,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weapon: {fileID: 3724921029229731674}
   inputManager: {fileID: -2493765135436071016}
+  rb: {fileID: 2147538063370531092}
   isAttacking: 0
   swingTimer: 0.18
+  knockbackValue: 350
+  knockbackSelf: 0
 --- !u!1 &2147538063818326182
 GameObject:
   m_ObjectHideFlags: 0

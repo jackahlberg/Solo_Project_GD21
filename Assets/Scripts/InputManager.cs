@@ -10,6 +10,8 @@ public class InputManager : MonoBehaviour
     public bool dashInput;
     public float jumpInput;
     public bool attackInput;
+    public bool upInput;
+    public bool downInput;
     void Update()
     {
         GetInput();
@@ -23,5 +25,7 @@ public class InputManager : MonoBehaviour
         dashInput = Input.GetKeyDown(KeyCode.LeftShift);
         jumpInput = Input.GetAxis("Vertical");
         attackInput = Input.GetKeyDown(KeyCode.Mouse0);
+        upInput = Input.GetKeyDown(KeyCode.W);
+        downInput = Input.GetKeyDown(KeyCode.S);
     }
 }
