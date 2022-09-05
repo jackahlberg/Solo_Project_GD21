@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
     private float _rollInterpolator;
     
     private bool _facingRight;
+    [SerializeField] private GameObject weapon;
     private Rigidbody2D _player;
     private SpriteRenderer _spriteRenderer;
     private CircleCollider2D _playerCol;
@@ -40,7 +41,7 @@ public class PlayerController : MonoBehaviour
     private float _coyoteTime;
     public float _jumpRememberTime;
     private float _jumpRemember;
-    
+
     void Start()
     {
         _player = GetComponent<Rigidbody2D>();
@@ -144,11 +145,13 @@ public class PlayerController : MonoBehaviour
         {
             _facingRight = !_facingRight;
             _spriteRenderer.flipX = false;
+            weapon.transform.localPosition = new Vector2(0.2f, 0);
         }
         else if (inputManager.walkInput < 0f && !_facingRight)
         {
             _facingRight = !_facingRight;
             _spriteRenderer.flipX = true;
+            weapon.transform.localPosition = new Vector2(-0.2f, 0);
         }
     }
 
@@ -267,7 +270,7 @@ public class PlayerController : MonoBehaviour
 
     private void Glide()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse1))
+        if (Input.GetKeyDown(KeyCode.Mouse2))
         {
             _betterJump.enabled = false;
             _isGliding = true;
