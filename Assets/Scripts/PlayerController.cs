@@ -115,7 +115,6 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
-        
         if (_player.velocity.y > 0)
         {
             _animator.SetFloat("JumpVelocity", 1);
@@ -264,7 +263,6 @@ public class PlayerController : MonoBehaviour
 
             _canDash = true;
         }
-
     }
 
     private void Glide()
