@@ -213,10 +213,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 714a998485abe8f48abf751ec6981b83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputManager: {fileID: -2493765135436071016}
+  unit: {fileID: 11400000, guid: dcbabe6aab8cf2b4eafc18fbf672f83a, type: 2}
   speed: 8
   jumpForce: 15
-  doubleJumpForce: 8
   slideSpeed: 1
   glideSpeed: 300
   weapon: {fileID: 3724921029229731674}

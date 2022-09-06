@@ -12,6 +12,7 @@ using Vector3 = UnityEngine.Vector3;
 public class PlayerController : MonoBehaviour
 {
     private InputManager inputManager;
+    public UnitSO unit;
     
     public float speed = 8f;
     public float jumpForce = 8f;
@@ -28,7 +29,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject weapon;
     private Rigidbody2D _player;
     private SpriteRenderer _spriteRenderer;
-    private CircleCollider2D _playerCol;
     private BetterJump _betterJump;
     private Animator _animator;
 
@@ -47,7 +47,6 @@ public class PlayerController : MonoBehaviour
     {
         _player = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        _playerCol = GetComponent<CircleCollider2D>();
         _betterJump = GetComponent<BetterJump>();
         _animator = GetComponent<Animator>();
         inputManager = GetComponent<InputManager>();
@@ -61,13 +60,33 @@ public class PlayerController : MonoBehaviour
         var dir = new Vector2(x, y);
         
         SurfaceChecks();
-        Dash(x, y);
-        Glide();
-        Walk(dir);
-        Jump();
-        Roll();
+        if (unit.hasDash)
+        {
+            Dash(x, y);
+        }
+        if (unit.hasGlide)
+        {
+            Glide();
+        }
+        if (unit.hasWalk)
+        {
+            Walk(dir);
+        }
+
+        if (unit.hasJump)
+        {
+            Jump();
+        }
+
+        if (unit.hasRoll)
+        {
+            Roll();
+        }
         Flip();
-        WallJump(dir);
+        if (unit.hasWallJump)
+        {
+            WallJump(dir);
+        }
     }
 
     private void SurfaceChecks()
@@ -196,12 +215,16 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D col)
     {
-        if (col.collider.gameObject.layer == LayerMask.NameToLayer("Wall"))
+        if (unit.hasWallJump)
         {
-            _player.velocity = new Vector2(_player.velocity.x, slideSpeed * Time.deltaTime);
-            _isOnWall = true;
-            _animator.SetBool("IsOnWall", true);
+            if (col.collider.gameObject.layer == LayerMask.NameToLayer("Wall"))
+            {
+                _player.velocity = new Vector2(_player.velocity.x, slideSpeed * Time.deltaTime);
+                _isOnWall = true;
+                _animator.SetBool("IsOnWall", true);
+            }
         }
+
     }
 
     private void OnTriggerStay2D(Collider2D col)
