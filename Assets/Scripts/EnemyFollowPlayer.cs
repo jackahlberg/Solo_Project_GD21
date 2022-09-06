@@ -13,11 +13,13 @@ public class EnemyFollowPlayer : MonoBehaviour
     private bool _jumpToRight;
     private bool _jumpToLeft;
     public bool _isGrounded;
-
+    
     [SerializeField] private LayerMask groundLayer;
+    private EnemyMelee _attack;
     void Start()
     {
         _player = GameObject.FindWithTag("Player").transform;
+        _attack = GetComponent<EnemyMelee>();
     }
 
     void Update()
@@ -26,15 +28,28 @@ public class EnemyFollowPlayer : MonoBehaviour
         _jumpToRight = Physics2D.Raycast(me.transform.position, Vector2.right, 1.5f, groundLayer);
         _jumpToLeft = Physics2D.Raycast(me.transform.position, Vector2.left, 1.5f, groundLayer);
 
+        var playerPos = transform.position.x - _player.transform.position.x;
+        
+        if (playerPos < 0)
+        {
+            transform.localScale = new Vector2(1, transform.localScale.y);
+        }
+
+        if (playerPos > 0)
+        {
+            transform.localScale = new Vector2(-1, transform.localScale.y);
+        }
+        
         MoveTowards();
         Jump();
     }
 
     private void MoveTowards()
     {
-        if (Vector2.Distance(me.transform.position, _player.transform.position) < 2f || Vector2.Distance(me.transform.position, _player.transform.position) > 20f)
+        if (Vector2.Distance(me.transform.position, _player.transform.position) < 3f || Vector2.Distance(me.transform.position, _player.transform.position) > 20f)
         {
-            return;
+            _attack.Attack();
+            enabled = false;
         }
         transform.position = Vector2.MoveTowards(transform.position, _player.transform.position, speed * Time.deltaTime);
     }

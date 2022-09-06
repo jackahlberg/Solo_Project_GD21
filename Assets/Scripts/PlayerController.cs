@@ -149,12 +149,19 @@ public class PlayerController : MonoBehaviour
             _facingRight = !_facingRight;
             _spriteRenderer.flipX = false;
             weapon.transform.localPosition = new Vector2(0.2f, 0);
+            weapon.transform.localScale = new Vector3(0.35f, 0.05f);
         }
         else if (inputManager.walkInput < 0f && !_facingRight)
         {
             _facingRight = !_facingRight;
             _spriteRenderer.flipX = true;
             weapon.transform.localPosition = new Vector2(-0.2f, 0);
+            weapon.transform.localScale = new Vector3(0.35f, 0.05f);
+        }
+        else if (inputManager.upInput)
+        {
+            weapon.transform.localScale = new Vector3(0.05f, 0.35f);
+            weapon.transform.localPosition = new Vector3(0f, 0.15f);
         }
     }
 
