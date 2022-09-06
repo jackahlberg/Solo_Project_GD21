@@ -273,7 +273,7 @@ public class PlayerController : MonoBehaviour
 
     private void Glide()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse2))
+        if (Input.GetKeyDown(KeyCode.Mouse1))
         {
             _betterJump.enabled = false;
             _isGliding = true;
