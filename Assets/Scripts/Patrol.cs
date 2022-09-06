@@ -38,12 +38,10 @@ public class Patrol : MonoBehaviour
     private void FixedUpdate()
     {
         _rb.velocity = new Vector2(moveSpeed * Time.fixedDeltaTime, _rb.velocity.y);
-        Debug.Log(_rb.velocity);
     }
 
     private void Move()
     {
-        //transform.position = Vector3.MoveTowards(transform.position, patrolPoints[i].transform.position, moveSpeed * Time.deltaTime);
         if (Vector2.Distance(transform.position, patrolPoints[0].transform.position) < 0.5f && _myScale.localScale.x == 1)
         {
             transform.localScale = new Vector3(-1, transform.localScale.y, transform.localScale.z);

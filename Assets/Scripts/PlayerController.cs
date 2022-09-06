@@ -11,16 +11,14 @@ using Vector3 = UnityEngine.Vector3;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private InputManager inputManager;
+    private InputManager inputManager;
     
     public float speed = 8f;
     public float jumpForce = 8f;
-    public float doubleJumpForce = 4f;
-    private int _jumpCount;
     public float slideSpeed;
     public float glideSpeed;
     private bool _isOnWall;
-    private bool _isDashing;
+    public bool isDashing { get; private set; }
     private bool _canDash;
     private bool _hasWallJumped;
     private bool _isGliding;
@@ -52,12 +50,12 @@ public class PlayerController : MonoBehaviour
         _playerCol = GetComponent<CircleCollider2D>();
         _betterJump = GetComponent<BetterJump>();
         _animator = GetComponent<Animator>();
+        inputManager = GetComponent<InputManager>();
         _canDash = true;
     }
 
     void Update()
     {
-
         var x = inputManager.walkInput;
         var y = inputManager.jumpInput;
         var dir = new Vector2(x, y);
@@ -97,7 +95,7 @@ public class PlayerController : MonoBehaviour
 
     private void Walk(Vector2 dir)
     {
-        if (_isDashing)
+        if (isDashing)
         {
             return;
         }
@@ -131,7 +129,6 @@ public class PlayerController : MonoBehaviour
         if ((_coyoteTime > 0) && (_jumpRemember > 0) && !_isOnWall)
         {
             _player.velocity = new Vector2(_player.velocity.x, jumpForce);
-            _jumpCount += 1;
         }
         
         //Double Jump
@@ -192,7 +189,6 @@ public class PlayerController : MonoBehaviour
         if (_isOnWall && Input.GetButtonDown("Jump") && _player.velocity.x < 0f || _isOnWall && Input.GetButtonDown("Jump") && 0f < _player.velocity.x)
         {
             _player.velocity = new Vector2((dir.x * 2) * speed * 0.7f, jumpForce);
-            _jumpCount = 0;
             _hasWallJumped = true;
             StartCoroutine(WallJumpTimer());
         }
@@ -252,12 +248,12 @@ public class PlayerController : MonoBehaviour
     {
         _player.gravityScale = 0f;
         _betterJump.enabled = false;
-        _isDashing = true;
+        isDashing = true;
         _canDash = false;
 
         yield return new WaitForSeconds(0.2f);
 
-        _isDashing = false;
+        isDashing = false;
         _player.gravityScale = 2.6f;
         _betterJump.enabled = true;
 
