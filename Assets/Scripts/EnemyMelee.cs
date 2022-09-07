@@ -29,4 +29,24 @@ public class EnemyMelee : MonoBehaviour
         follow.enabled = true;
         enabled = false;
     }
+
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.CompareTag("Player"))
+        {
+            HealthContainer playerHealth = col.gameObject.GetComponent<HealthContainer>();
+            playerHealth.health--;
+
+            Time.timeScale = 0.5f;
+
+            StartCoroutine(DamagedSlowDown());
+        }
+    }
+
+    IEnumerator DamagedSlowDown()
+    {
+        yield return new WaitForSeconds(0.25f);
+
+        Time.timeScale = 1;
+    }
 }

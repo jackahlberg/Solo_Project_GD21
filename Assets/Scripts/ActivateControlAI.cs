@@ -1,24 +1,24 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using Cinemachine;
 public class ActivateControlAI : MonoBehaviour
 {
-    private PlayerController _playerController;
-    private Transform _player;
+    [SerializeField] private PlayerController playerController;
+    [SerializeField] private Transform player;
     [SerializeField] private PlayerController controlledEnemy;
     [SerializeField] private Transform enemy;
     [SerializeField] private CinemachineVirtualCamera cam;
+    private Rigidbody2D _enemyRb;
+    private Rigidbody2D _playerRb;
 
     private bool _inRange;
     private bool _isControlling;
 
     private void Start()
     {
-        _playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
-        _player = GameObject.FindWithTag("Player").transform;
+        
+        _enemyRb = enemy.gameObject.GetComponent<Rigidbody2D>();
+        _playerRb = player.gameObject.GetComponent<Rigidbody2D>();
     }
 
     private void Update()
@@ -26,15 +26,18 @@ public class ActivateControlAI : MonoBehaviour
         if (_inRange && Input.GetKeyDown(KeyCode.E) && !_isControlling)
         {
             _isControlling = true;
-            _playerController.enabled = false;
+            playerController.enabled = false;
             controlledEnemy.enabled = true;
+            _playerRb.velocity = Vector3.zero;
         }
         else if (Input.GetKeyDown(KeyCode.E) && _isControlling)
         {
             _isControlling = false;
-            _playerController.enabled = true;
+            playerController.enabled = true;
             controlledEnemy.enabled = false;
+            _enemyRb.velocity = Vector3.zero;
         }
+
     }
 
     private void OnTriggerEnter2D(Collider2D col)
@@ -51,8 +54,8 @@ public class ActivateControlAI : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            cam.Follow = _player;
-            cam.LookAt = _player; 
+            cam.Follow = player;
+            cam.LookAt = player; 
             _inRange = false;
         }
     }

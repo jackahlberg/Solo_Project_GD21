@@ -13,6 +13,7 @@ TagManager:
   - Wind
   - Spike
   - Checkpoint
+  - ControlledEnemy
   layers:
   - Default
   - TransparentFX
