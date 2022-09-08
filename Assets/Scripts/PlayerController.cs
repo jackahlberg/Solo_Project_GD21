@@ -152,7 +152,7 @@ public class PlayerController : MonoBehaviour
             _player.velocity = new Vector2(_player.velocity.x, jumpForce);
         }
 
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump") && isGrounded)
         {
             CreateDust();
         }
@@ -169,7 +169,8 @@ public class PlayerController : MonoBehaviour
     {
         if (inputManager.walkInput > 0f && _facingRight)
         {
-            CreateDust();
+            if(isGrounded)
+                CreateDust();
             _facingRight = !_facingRight;
             _spriteRenderer.flipX = false;
             weapon.transform.localPosition = new Vector2(0.2f, 0);
@@ -177,7 +178,8 @@ public class PlayerController : MonoBehaviour
         }
         else if (inputManager.walkInput < 0f && !_facingRight)
         {
-            CreateDust();
+            if(isGrounded)
+                CreateDust();
             _facingRight = !_facingRight;
             _spriteRenderer.flipX = true;
             weapon.transform.localPosition = new Vector2(-0.2f, 0);
