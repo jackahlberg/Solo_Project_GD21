@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
 {
     private InputManager inputManager;
     public UnitSO unit;
+
+    [SerializeField] private ParticleSystem _dust;
     
     public float speed = 8f;
     public float jumpForce = 8f;
@@ -149,6 +151,11 @@ public class PlayerController : MonoBehaviour
         {
             _player.velocity = new Vector2(_player.velocity.x, jumpForce);
         }
+
+        if (Input.GetButtonDown("Jump"))
+        {
+            CreateDust();
+        }
         
         //Double Jump
         /*else if (inputManager.jumpInput && _jumpCount == 1 && !_isOnWall)
@@ -162,6 +169,7 @@ public class PlayerController : MonoBehaviour
     {
         if (inputManager.walkInput > 0f && _facingRight)
         {
+            CreateDust();
             _facingRight = !_facingRight;
             _spriteRenderer.flipX = false;
             weapon.transform.localPosition = new Vector2(0.2f, 0);
@@ -169,6 +177,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (inputManager.walkInput < 0f && !_facingRight)
         {
+            CreateDust();
             _facingRight = !_facingRight;
             _spriteRenderer.flipX = true;
             weapon.transform.localPosition = new Vector2(-0.2f, 0);
@@ -317,6 +326,10 @@ public class PlayerController : MonoBehaviour
             _betterJump.enabled = true;
             _isGliding = false;
         }
-
+    }
+    
+    void CreateDust()
+    {
+        _dust.Play();
     }
 }
