@@ -37,8 +37,18 @@ public class PlayerController_Erick : MonoBehaviour
     private Rigidbody2D _player;
     private SpriteRenderer _spriteRenderer;
     private BetterJumpErick _betterJump;
-    private Animator _animator;
 
+    //ANIMATION
+    private Animator _animator;
+    private string _currentState;
+    
+    //ANIMATION STATES
+    private const string PlayerIdle = "idle";
+    private const string PlayerWalk = "walk";
+    private const string PlayerJump = "jump";
+    private const string PlayerFall = "fall";
+    private const string PlayerRoll = "roll";
+    
     public Transform groundCheck;
     public float groundCheckRadius;
     public LayerMask groundLayer;
@@ -64,14 +74,13 @@ public class PlayerController_Erick : MonoBehaviour
     void Update()
     {
         var x = inputManager.walkInput;
-        var y = inputManager.jumpInput;
+        var y = Input.GetAxis("Vertical"); //NEW
         var dir = new Vector2(x, 0);
         
         SurfaceChecks();
         if (unit.hasDash)
         {
-            Dash(x, 0);
-            //Dash(x, y);
+            Dash(x, y);
         }
         if (unit.hasGlide)
         {
@@ -96,8 +105,30 @@ public class PlayerController_Erick : MonoBehaviour
         {
             WallJump(dir);
         }
+
+        AnimationCheck();
     }
 
+    void AnimationCheck()
+    {
+        if (isGrounded)
+        {
+            _isJumping = false;
+            if (inputManager.walkInput != 0)
+                ChangeAnimationState(PlayerWalk);
+            else
+                ChangeAnimationState(PlayerIdle);
+        }
+        else
+        {
+            if (_player.velocity.y > 0) 
+                ChangeAnimationState(PlayerJump);
+
+            if (_player.velocity.y <= 0)
+                ChangeAnimationState(PlayerFall); 
+        }
+        
+    }   
     private void SurfaceChecks()
     {
         underRoof = Physics2D.Raycast(groundCheck.position, Vector2.up, 3f, roofLayer);
@@ -352,5 +383,17 @@ public class PlayerController_Erick : MonoBehaviour
     void CreateDust()
     {
         _dust.Play();
+    }
+    
+    void ChangeAnimationState(string newState) //NEW
+    {
+        //stop the same animation from interrupting itself
+        if (_currentState == newState) return;
+        
+        //play the animation
+        _animator.Play(newState);
+        
+        //reassigning the current state
+        _currentState = newState;
     }
 }
