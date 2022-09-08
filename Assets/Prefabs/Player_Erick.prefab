@@ -127,7 +127,7 @@ Transform:
   - {fileID: 4153810788018862461}
   - {fileID: 5663715184975286010}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2147538063370531090
 SpriteRenderer:
@@ -228,7 +228,7 @@ Animator:
   m_GameObject: {fileID: 2147538063370531103}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 01ee0a177a593014e8d5fb8283fbd575, type: 2}
+  m_Controller: {fileID: 9100000, guid: 36d8ee09c0b51d44086887832391c8c3, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -275,10 +275,10 @@ MonoBehaviour:
   _dashTrail: {fileID: 783376100516500024}
   slideSpeed: 1
   glideSpeed: 300
-  _movementAcceleration: 5
-  _maxMoveSpeed: 15
+  _movementAcceleration: 5000
+  _maxMoveSpeed: 12
   _linearDrag: 5
-  jumpForce: 15
+  jumpForce: 20
   weapon: {fileID: 3724921029229731674}
   groundCheck: {fileID: 0}
   groundCheckRadius: 1.15
@@ -329,8 +329,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 074fd6cf9e68f514a8c0dfe4f49d748c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fallMultiplier: 2.5
-  lowJumpMultiplier: 2
+  fallMultiplier: 10
+  lowJumpMultiplier: 80
 --- !u!114 &803703604
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -343,7 +343,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c92f5680c6c62346926bb559bad1955, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapon: {fileID: 0}
+  weapon: {fileID: 3724921029229731674}
   inputManager: {fileID: 0}
   rb: {fileID: 0}
   isAttacking: 0
