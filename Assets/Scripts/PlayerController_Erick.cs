@@ -11,16 +11,19 @@ using Vector3 = UnityEngine.Vector3;
 
 public class PlayerController_Erick : MonoBehaviour
 {
-    private InputManager inputManager;
+    private InputManagerErick inputManager;
     public UnitSO unit;
 
     [SerializeField] private ParticleSystem _dust;
     
     public float speed = 8f;
-    public float jumpForce = 8f;
     public float slideSpeed;
     public float glideSpeed;
     private bool _isOnWall;
+    
+    [Header("JUMP")]
+    private bool _isJumping = false; //NEW
+    public float jumpForce = 8f;
     public bool isDashing { get; private set; }
     private bool _canDash;
     private bool _hasWallJumped;
@@ -28,10 +31,12 @@ public class PlayerController_Erick : MonoBehaviour
     private float _rollInterpolator;
     
     private bool _facingRight;
+    
+    [Header("REFERENCES")]
     [SerializeField] private GameObject weapon;
     private Rigidbody2D _player;
     private SpriteRenderer _spriteRenderer;
-    private BetterJump _betterJump;
+    private BetterJumpErick _betterJump;
     private Animator _animator;
 
     public Transform groundCheck;
@@ -49,9 +54,9 @@ public class PlayerController_Erick : MonoBehaviour
     {
         _player = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        _betterJump = GetComponent<BetterJump>();
+        _betterJump = GetComponent<BetterJumpErick>();
         _animator = GetComponent<Animator>();
-        inputManager = GetComponent<InputManager>();
+        inputManager = GetComponent<InputManagerErick>();
         _canDash = true;
         groundCheck = gameObject.GetComponent<Transform>(); //NEW
     }
@@ -60,12 +65,13 @@ public class PlayerController_Erick : MonoBehaviour
     {
         var x = inputManager.walkInput;
         var y = inputManager.jumpInput;
-        var dir = new Vector2(x, y);
+        var dir = new Vector2(x, 0);
         
         SurfaceChecks();
         if (unit.hasDash)
         {
-            Dash(x, y);
+            Dash(x, 0);
+            //Dash(x, y);
         }
         if (unit.hasGlide)
         {
@@ -139,6 +145,16 @@ public class PlayerController_Erick : MonoBehaviour
 
     private void Jump()
     {
+        if (inputManager.jumpInput && isGrounded)
+        {
+            CreateDust();
+            _player.velocity = new Vector2(_player.velocity.x, 0);
+            _player.velocity = new Vector2(_player.velocity.x, jumpForce);
+            isGrounded = false;
+            _isJumping = true;
+        }
+        
+        /*
         if (_player.velocity.y > 0)
         {
             _animator.SetFloat("JumpVelocity", 1);
@@ -147,6 +163,7 @@ public class PlayerController_Erick : MonoBehaviour
         {
             _animator.SetFloat("JumpVelocity", -1);
         }
+        */
         
         if ((_coyoteTime > 0) && (_jumpRemember > 0) && !_isOnWall)
         {
@@ -165,6 +182,7 @@ public class PlayerController_Erick : MonoBehaviour
             _jumpCount = 0;
         }*/
     }
+    
 
     private void Flip()
     {

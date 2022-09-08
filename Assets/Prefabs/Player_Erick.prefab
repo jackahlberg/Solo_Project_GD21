@@ -97,12 +97,12 @@ GameObject:
   - component: {fileID: 2147538063370531092}
   - component: {fileID: -4387044381236773618}
   - component: {fileID: 1617863663230134102}
-  - component: {fileID: -2493765135436071016}
+  - component: {fileID: 1202377156484622551}
   - component: {fileID: 1345225393209250825}
-  - component: {fileID: 1413371432439880812}
   - component: {fileID: -3105404439649561801}
   - component: {fileID: -2157748431733825308}
-  - component: {fileID: 1312515075720625726}
+  - component: {fileID: 5685902834939132971}
+  - component: {fileID: 803703604}
   m_Layer: 0
   m_Name: Player_Erick
   m_TagString: Player
@@ -126,7 +126,7 @@ Transform:
   - {fileID: 8630221020496865612}
   - {fileID: 4153810788018862461}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2147538063370531090
 SpriteRenderer:
@@ -237,7 +237,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &-2493765135436071016
+--- !u!114 &1202377156484622551
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -246,7 +246,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2147538063370531103}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7fb3bec715fbcf49879422899f1a3af, type: 3}
+  m_Script: {fileID: 11500000, guid: df5ba3dd0f4bf6c40968a8c634483c7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   walkInput: 0
@@ -272,9 +272,9 @@ MonoBehaviour:
   unit: {fileID: 11400000, guid: dcbabe6aab8cf2b4eafc18fbf672f83a, type: 2}
   _dust: {fileID: 6011017577504069226}
   speed: 8
-  jumpForce: 15
   slideSpeed: 1
   glideSpeed: 300
+  jumpForce: 15
   weapon: {fileID: 3724921029229731674}
   groundCheck: {fileID: 0}
   groundCheckRadius: 1.15
@@ -288,20 +288,6 @@ MonoBehaviour:
   underRoof: 0
   _groundedRememberTime: 0.15
   _jumpRememberTime: 0.2
---- !u!114 &1413371432439880812
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2147538063370531103}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e098ab0fe33d3de46b96ec6d5fd49816, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fallMultiplier: 2.5
-  lowJumpMultiplier: 2
 --- !u!114 &-3105404439649561801
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -327,7 +313,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   respawnPoint: {x: 0, y: 0, z: 0}
---- !u!114 &1312515075720625726
+--- !u!114 &5685902834939132971
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -336,16 +322,30 @@ MonoBehaviour:
   m_GameObject: {fileID: 2147538063370531103}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cfff4390dd5497a4cb4ecf890e9f1581, type: 3}
+  m_Script: {fileID: 11500000, guid: 074fd6cf9e68f514a8c0dfe4f49d748c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapon: {fileID: 3724921029229731674}
-  inputManager: {fileID: -2493765135436071016}
-  rb: {fileID: 2147538063370531092}
+  fallMultiplier: 2.5
+  lowJumpMultiplier: 2
+--- !u!114 &803703604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2147538063370531103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c92f5680c6c62346926bb559bad1955, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weapon: {fileID: 0}
+  inputManager: {fileID: 0}
+  rb: {fileID: 0}
   isAttacking: 0
-  swingTimer: 0.18
-  knockbackValue: 350
-  knockbackSelf: 500
+  swingTimer: 0
+  knockbackValue: 0
+  knockbackSelf: 0
 --- !u!1 &2147538063818326182
 GameObject:
   m_ObjectHideFlags: 0
