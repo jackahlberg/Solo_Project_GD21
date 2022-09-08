@@ -813,6 +813,18 @@ PrefabInstance:
       propertyPath: weapon
       value: 
       objectReference: {fileID: 1266634359}
+    - target: {fileID: 1345225393209250825, guid: b887bd216f7cc10499dbc02a98484171, type: 3}
+      propertyPath: _linearDrag
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1345225393209250825, guid: b887bd216f7cc10499dbc02a98484171, type: 3}
+      propertyPath: _maxMoveSpeed
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 1345225393209250825, guid: b887bd216f7cc10499dbc02a98484171, type: 3}
+      propertyPath: _movementAcceleration
+      value: 5000
+      objectReference: {fileID: 0}
     - target: {fileID: 1617863663230134102, guid: b887bd216f7cc10499dbc02a98484171, type: 3}
       propertyPath: m_Controller
       value: 

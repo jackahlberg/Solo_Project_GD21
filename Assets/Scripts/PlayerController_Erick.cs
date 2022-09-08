@@ -16,10 +16,15 @@ public class PlayerController_Erick : MonoBehaviour
 
     [SerializeField] private ParticleSystem _dust;
     
-    public float speed = 8f;
     public float slideSpeed;
     public float glideSpeed;
     private bool _isOnWall;
+    
+    [Header("MOVEMENT")]
+    [SerializeField] private float _movementAcceleration = 5f;
+    [SerializeField] private float _maxMoveSpeed = 15f;
+    [SerializeField] private float _linearDrag = 5f;
+    private float _horizontalDirection;
     
     [Header("JUMP")]
     private bool _isJumping = false; //NEW
@@ -105,8 +110,8 @@ public class PlayerController_Erick : MonoBehaviour
         {
             WallJump(dir);
         }
-
-        AnimationCheck();
+        ApplyLinearDrag(); //NEW
+        AnimationCheck(); //NEW
     }
 
     void AnimationCheck()
@@ -128,7 +133,7 @@ public class PlayerController_Erick : MonoBehaviour
                 ChangeAnimationState(PlayerFall); 
         }
         
-    }   
+    }   //NEW
     private void SurfaceChecks()
     {
         underRoof = Physics2D.Raycast(groundCheck.position, Vector2.up, 3f, roofLayer);
@@ -163,7 +168,14 @@ public class PlayerController_Erick : MonoBehaviour
         {
             return;
         }
-        _player.velocity = new Vector2(dir.x * speed, _player.velocity.y);
+        
+        //NEW MOVEMENT
+        _player.AddForce((dir * _movementAcceleration) * Time.deltaTime);
+        if (Mathf.Abs(_player.velocity.x) > _maxMoveSpeed)
+            _player.velocity = new Vector2(Mathf.Sign(_player.velocity.x) * _maxMoveSpeed, _player.velocity.y);
+        
+        //_player.velocity = new Vector2(dir.x * speed, _player.velocity.y);
+        /*
         if (_player.velocity.x > 0.01f || _player.velocity.x < 0f)
         {
             _animator.SetFloat("Speed",1);
@@ -172,9 +184,10 @@ public class PlayerController_Erick : MonoBehaviour
         {
             _animator.SetFloat("Speed",0);
         }
+        */
     }
 
-    private void Jump()
+    private void Jump() //NEW
     {
         if (inputManager.jumpInput && isGrounded)
         {
@@ -244,13 +257,14 @@ public class PlayerController_Erick : MonoBehaviour
 
     private void Roll()
     {
+        float moveSpeedTemp = _maxMoveSpeed;
         if (inputManager.rollhInput && isGrounded)
         {
             _animator.SetBool("IsRolling",true);
             transform.localScale = new Vector3(9f, 9f, 1);
             if (_player.velocity.x > 0 || _player.velocity.x < 0)
             {
-                speed = Mathf.Lerp(4f, 12f, _rollInterpolator);
+                _maxMoveSpeed = Mathf.Lerp(4f, 12f, _rollInterpolator);
                 _rollInterpolator += 0.4f * Time.deltaTime;
             }
 
@@ -259,7 +273,7 @@ public class PlayerController_Erick : MonoBehaviour
         {
             _animator.SetBool("IsRolling",false);
             transform.localScale = new Vector3(11,11,1);
-            speed = 8f;
+            _maxMoveSpeed = moveSpeedTemp;
             _rollInterpolator = 0f;
         }
     }
@@ -268,7 +282,7 @@ public class PlayerController_Erick : MonoBehaviour
     {
         if (_isOnWall && Input.GetButtonDown("Jump") && _player.velocity.x < 0f || _isOnWall && Input.GetButtonDown("Jump") && 0f < _player.velocity.x)
         {
-            _player.velocity = new Vector2((dir.x * 2) * speed * 0.7f, jumpForce);
+            _player.velocity = new Vector2((dir.x * 2) * _maxMoveSpeed * 0.7f, jumpForce);
             _hasWallJumped = true;
             StartCoroutine(WallJumpTimer());
         }
@@ -383,6 +397,14 @@ public class PlayerController_Erick : MonoBehaviour
     void CreateDust()
     {
         _dust.Play();
+    }
+    
+    void ApplyLinearDrag() //NEW
+    {
+        if (Mathf.Abs(_horizontalDirection) < 0.4f)
+            _player.drag = _linearDrag;
+        else
+            _player.drag = 0;
     }
     
     void ChangeAnimationState(string newState) //NEW
