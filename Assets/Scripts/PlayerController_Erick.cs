@@ -282,7 +282,7 @@ public class PlayerController_Erick : MonoBehaviour
     {
         if (_isOnWall && Input.GetButtonDown("Jump") && _player.velocity.x < 0f || _isOnWall && Input.GetButtonDown("Jump") && 0f < _player.velocity.x)
         {
-            _player.velocity = new Vector2((dir.x * 2) * _maxMoveSpeed * 0.7f, jumpForce);
+            _player.velocity = new Vector2((dir.x * 2) * _maxMoveSpeed * 1.5f, jumpForce * 2f);
             _hasWallJumped = true;
             StartCoroutine(WallJumpTimer());
         }
