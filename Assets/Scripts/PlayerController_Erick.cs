@@ -15,6 +15,7 @@ public class PlayerController_Erick : MonoBehaviour
     public UnitSO unit;
 
     [SerializeField] private ParticleSystem _dust;
+    [SerializeField] private ParticleSystem _dashTrail;
     
     public float slideSpeed;
     public float glideSpeed;
@@ -334,10 +335,12 @@ public class PlayerController_Erick : MonoBehaviour
     {
         if (inputManager.dashInput && _canDash)
         {
+            CreateDashTrail();
+            
             _player.velocity = Vector2.zero;
             Vector2 dir = new Vector2(x, y);
 
-            _player.velocity += dir.normalized * 20;
+            _player.velocity += dir.normalized * 100;
             StartCoroutine(DashWait());
         }
     }
@@ -397,6 +400,11 @@ public class PlayerController_Erick : MonoBehaviour
     void CreateDust()
     {
         _dust.Play();
+    }
+    
+    void CreateDashTrail()
+    {
+        _dashTrail.Play();
     }
     
     void ApplyLinearDrag() //NEW
