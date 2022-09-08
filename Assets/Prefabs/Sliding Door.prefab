@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7368901108794208453}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Start Pos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 7368901108825553886}
   - component: {fileID: 7368901108825553887}
   - component: {fileID: 1349004376660611906}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sliding Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -151,7 +151,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7368901109278903074}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sliding Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -173,5 +173,5 @@ Transform:
   - {fileID: 7368901108825553886}
   - {fileID: 7368901108794208453}
   m_Father: {fileID: 0}
-  m_RootOrder: 28
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
