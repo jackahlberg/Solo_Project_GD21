@@ -36,6 +36,8 @@ public class ActivateControlAI : MonoBehaviour
             playerController.enabled = true;
             controlledEnemy.enabled = false;
             _enemyRb.velocity = Vector3.zero;
+            cam.LookAt = player;
+            cam.Follow = player;
         }
 
     }
