@@ -6,12 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/LevelSelection.unity
+    path: Assets/Scenes/Jack/LevelSelection.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/Platforming_Level.unity
+    path: Assets/Scenes/Jack/Platforming_Level.unity
     guid: 3d5c6fb365827244798c24e2a9e6e951
   - enabled: 1
-    path: Assets/Scenes/DeflectionLevel.unity
+    path: Assets/Scenes/Jack/DeflectionLevel.unity
     guid: 7ed708a177eb20e4797b07588e92e674
   m_configObjects: {}
