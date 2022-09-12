@@ -279,6 +279,9 @@ MonoBehaviour:
   _maxMoveSpeed: 12
   _linearDrag: 5
   jumpForce: 20
+  _dashMultiplier: 100
+  _dashShakeIntensity: 5
+  _dashShakeDuration: 0.2
   weapon: {fileID: 3724921029229731674}
   groundCheck: {fileID: 0}
   groundCheckRadius: 1.15

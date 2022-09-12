@@ -16,6 +16,8 @@ public class PlayerController_Erick : MonoBehaviour
 
     [SerializeField] private ParticleSystem _dust;
     [SerializeField] private ParticleSystem _dashTrail;
+    private bool _groundTouched = false;
+    private bool _hasCreatedDust;
     
     public float slideSpeed;
     public float glideSpeed;
@@ -30,6 +32,11 @@ public class PlayerController_Erick : MonoBehaviour
     [Header("JUMP")]
     private bool _isJumping = false; //NEW
     public float jumpForce = 8f;
+
+    [Header("Dash")]
+    [SerializeField] private float _dashMultiplier;
+    [SerializeField] private float _dashShakeIntensity;
+    [SerializeField] private float _dashShakeDuration;
     public bool isDashing { get; private set; }
     private bool _canDash;
     private bool _hasWallJumped;
@@ -48,9 +55,6 @@ public class PlayerController_Erick : MonoBehaviour
     private Animator _animator;
     private string _currentState;
     
-    private bool _groundTouched = false;
-    private bool _hasCreatedDust;
-    
     //ANIMATION STATES
     private const string PlayerIdle = "idle";
     private const string PlayerWalk = "walk";
@@ -58,6 +62,7 @@ public class PlayerController_Erick : MonoBehaviour
     private const string PlayerFall = "fall";
     private const string PlayerRoll = "roll";
     
+    //GRUNDCHECK
     public Transform groundCheck;
     public float groundCheckRadius;
     public LayerMask groundLayer;
@@ -139,6 +144,7 @@ public class PlayerController_Erick : MonoBehaviour
         }
         
     }   //NEW
+    
     private void SurfaceChecks()
     {
         underRoof = Physics2D.Raycast(groundCheck.position, Vector2.up, 3f, roofLayer);
@@ -232,7 +238,6 @@ public class PlayerController_Erick : MonoBehaviour
         }*/
     }
     
-
     private void Flip()
     {
         if (inputManager.walkInput > 0f && _facingRight)
@@ -339,12 +344,14 @@ public class PlayerController_Erick : MonoBehaviour
     {
         if (inputManager.dashInput && _canDash)
         {
+            //FEEDBACK
             CreateDashTrail();
+            VirtualMachineShake.Instance.CameraShake(_dashShakeIntensity, _dashShakeDuration);
             
             _player.velocity = Vector2.zero;
             Vector2 dir = new Vector2(x, y);
 
-            _player.velocity += dir.normalized * 100;
+            _player.velocity += dir.normalized * _dashMultiplier;
             StartCoroutine(DashWait());
         }
     }
@@ -448,4 +455,5 @@ public class PlayerController_Erick : MonoBehaviour
             _hasCreatedDust = true;
         } 
     }
+    
 }

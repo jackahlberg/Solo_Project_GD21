@@ -481,6 +481,7 @@ GameObject:
   - component: {fileID: 991941749}
   - component: {fileID: 991941748}
   - component: {fileID: 991941747}
+  - component: {fileID: 991941750}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -564,6 +565,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &991941750
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 991941745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NoiseProfile: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
+  m_PivotOffset: {x: 0, y: 0, z: 0}
+  m_AmplitudeGain: 0
+  m_FrequencyGain: 5
+  mNoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1001 &1068376168
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -572,30 +590,14 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 803703604, guid: b887bd216f7cc10499dbc02a98484171, type: 3}
-      propertyPath: weapon
-      value: 
-      objectReference: {fileID: 1266634359}
     - target: {fileID: 1345225393209250825, guid: b887bd216f7cc10499dbc02a98484171, type: 3}
-      propertyPath: jumpForce
-      value: 20
+      propertyPath: _dashShakeDuration
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 1345225393209250825, guid: b887bd216f7cc10499dbc02a98484171, type: 3}
-      propertyPath: _linearDrag
+      propertyPath: _dashShakeIntensity
       value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 1345225393209250825, guid: b887bd216f7cc10499dbc02a98484171, type: 3}
-      propertyPath: _maxMoveSpeed
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 1345225393209250825, guid: b887bd216f7cc10499dbc02a98484171, type: 3}
-      propertyPath: _movementAcceleration
-      value: 5000
-      objectReference: {fileID: 0}
-    - target: {fileID: 1617863663230134102, guid: b887bd216f7cc10499dbc02a98484171, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 36d8ee09c0b51d44086887832391c8c3, type: 2}
     - target: {fileID: 2147538063370531091, guid: b887bd216f7cc10499dbc02a98484171, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -643,14 +645,6 @@ PrefabInstance:
     - target: {fileID: 2147538063370531103, guid: b887bd216f7cc10499dbc02a98484171, type: 3}
       propertyPath: m_Name
       value: Player_Erick
-      objectReference: {fileID: 0}
-    - target: {fileID: 5685902834939132971, guid: b887bd216f7cc10499dbc02a98484171, type: 3}
-      propertyPath: fallMultiplier
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 5685902834939132971, guid: b887bd216f7cc10499dbc02a98484171, type: 3}
-      propertyPath: lowJumpMultiplier
-      value: 80
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
@@ -724,6 +718,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1177813679}
   - component: {fileID: 1177813678}
+  - component: {fileID: 1177813680}
   m_Layer: 0
   m_Name: CM vcam1
   m_TagString: Untagged
@@ -785,11 +780,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1266634359 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3724921029229731674, guid: b887bd216f7cc10499dbc02a98484171, type: 3}
-  m_PrefabInstance: {fileID: 1068376168}
+--- !u!114 &1177813680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1177813677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dfd094a0a671af41a9b0acbcc02b003, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2111158193
 PrefabInstance:
   m_ObjectHideFlags: 0
