@@ -590,14 +590,6 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1345225393209250825, guid: b887bd216f7cc10499dbc02a98484171, type: 3}
-      propertyPath: _dashShakeDuration
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1345225393209250825, guid: b887bd216f7cc10499dbc02a98484171, type: 3}
-      propertyPath: _dashShakeIntensity
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 2147538063370531091, guid: b887bd216f7cc10499dbc02a98484171, type: 3}
       propertyPath: m_RootOrder
       value: 1
