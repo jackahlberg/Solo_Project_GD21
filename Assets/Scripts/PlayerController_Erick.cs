@@ -48,6 +48,9 @@ public class PlayerController_Erick : MonoBehaviour
     private Animator _animator;
     private string _currentState;
     
+    private bool _groundTouched = false;
+    private bool _hasCreatedDust;
+    
     //ANIMATION STATES
     private const string PlayerIdle = "idle";
     private const string PlayerWalk = "walk";
@@ -112,7 +115,8 @@ public class PlayerController_Erick : MonoBehaviour
             WallJump(dir);
         }
         ApplyLinearDrag(); //NEW
-        AnimationCheck(); //NEW
+        AnimationCheck();
+        DustOnLand();//NEW
     }
 
     void AnimationCheck()
@@ -425,5 +429,23 @@ public class PlayerController_Erick : MonoBehaviour
         
         //reassigning the current state
         _currentState = newState;
+    }
+
+    void DustOnLand()
+    {
+        if(!isGrounded)
+        {
+            _groundTouched = false;
+            _hasCreatedDust = false;
+        }
+        else
+            _groundTouched = true;
+
+        if(_groundTouched && !_hasCreatedDust)
+        {
+            CreateDust();
+            _groundTouched = false;
+            _hasCreatedDust = true;
+        } 
     }
 }
