@@ -2,15 +2,18 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class MeleeAttack : MonoBehaviour
 {
     [SerializeField] private GameObject weapon;
-    [SerializeField] private InputManager inputManager;
+    [SerializeField] private InputManagerErick inputManager;
     [SerializeField] private Rigidbody2D rb;
     private HealthContainer _health;
+    [SerializeField] private GameObject gold;
 
     public bool isAttacking;
     public float swingTimer;
@@ -53,6 +56,18 @@ public class MeleeAttack : MonoBehaviour
             
             if (_health.health <= 0)
             {
+
+                var amount = Random.Range(1, 7);
+                
+                for (int i = 0; i < amount; i++)
+                {
+                    var direction = Random.Range((float)-120, 120);
+                    var force = Random.Range(100, 300);
+                    var spawnedGold = Instantiate(gold, enemy.transform.position, quaternion.identity);
+                    spawnedGold.GetComponent<Rigidbody2D>().AddForce(new Vector2(direction, force));
+                    Debug.Log(direction + " " + force + " " + amount);
+                }
+                
                 Destroy(enemy);
             }
         }

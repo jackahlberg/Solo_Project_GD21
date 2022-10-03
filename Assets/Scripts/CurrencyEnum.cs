@@ -24,9 +24,9 @@ public class CurrencyEnum : MonoBehaviour
     [SerializeField] private CurrencyAmount currencyAmount;
     [SerializeField] private CurrencyType currencyType;
 
-    public void OnTriggerEnter2D(Collider2D col)
+    public void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.CompareTag("Player"))
+        if (col.gameObject.CompareTag("Player"))
         {
             switch (currencyAmount)
             {

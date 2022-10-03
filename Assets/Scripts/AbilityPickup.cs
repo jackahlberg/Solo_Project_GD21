@@ -1,42 +1,47 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class AbilityPickup : MonoBehaviour
 {
-    [SerializeField] private bool activateDash;
-    [SerializeField] private bool activateWallJump;
-    [SerializeField] private bool activateRoll;
-    [SerializeField] private bool activateGlide;
-    [SerializeField] private bool activateDoubleJump;
     private UnitSO _unit;
 
+    public enum Abilities
+    {
+        Dash, WallJump, Roll, Glide, DoubleJump
+    }
+
+    [SerializeField] private Abilities ability;
     private void Start()
     {
         _unit = GameObject.FindWithTag("Player").GetComponent<OfficialPlayerController>().unit;
     }
 
-    private void OnTriggerEnter2D(Collider2D col)
+    private void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.CompareTag("Player"))
+        if (col.gameObject.CompareTag("Player"))
         {
-            if (activateDash)
+            switch (ability)
             {
-                _unit.hasDash = true;
-            }
-            else if (activateWallJump)
-            {
-                _unit.hasWallJump = true;
-            }
-            else if (activateRoll)
-            {
-                _unit.hasRoll = true;
-            }
-            else if (activateGlide)
-            {
-                _unit.hasGlide = true;
-            }
-            else if (activateDoubleJump)
-            {
-                _unit.hasDoubleJump = true;
+                case Abilities.Dash:
+                    _unit.hasDash = true;
+                    
+                    break;
+                case Abilities.Glide:
+                    _unit.hasGlide = true;
+                    
+                    break;
+                case Abilities.Roll:
+                    _unit.hasRoll = true;
+                    
+                    break;
+                case Abilities.DoubleJump:
+                    _unit.hasDoubleJump = true;
+                        
+                    break;
+                case  Abilities.WallJump:
+                    _unit.hasWallJump = true;
+                    
+                    break;
             }
             
             Destroy(gameObject);
