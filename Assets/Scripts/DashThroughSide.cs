@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class DashThroughSide : MonoBehaviour
 {
-    private PlayerController _player;
+    private OfficialPlayerController _player;
     private Rigidbody2D _playerRigidbody;
     private BoxCollider2D _collider;
 
     private void Start()
     {
         _collider = GetComponent<BoxCollider2D>();
-        _player = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+        _player = GameObject.FindWithTag("Player").GetComponent<OfficialPlayerController>();
         _playerRigidbody = GameObject.FindWithTag("Player").GetComponent<Rigidbody2D>();
     }
 

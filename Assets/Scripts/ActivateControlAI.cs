@@ -3,7 +3,7 @@ using UnityEngine;
 using Cinemachine;
 public class ActivateControlAI : MonoBehaviour
 {
-    [SerializeField] private PlayerController playerController;
+    [SerializeField] private OfficialPlayerController playerController;
     [SerializeField] private Transform player;
     [SerializeField] private PlayerController controlledEnemy;
     [SerializeField] private Transform enemy;
