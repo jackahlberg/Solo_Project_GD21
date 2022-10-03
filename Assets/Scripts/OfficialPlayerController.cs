@@ -75,7 +75,6 @@ public class OfficialPlayerController : MonoBehaviour
     private float _coyoteTime;
     public float _jumpRememberTime;
     private float _jumpRemember;
-
     void Start()
     {
         _player = GetComponent<Rigidbody2D>();
@@ -190,7 +189,6 @@ public class OfficialPlayerController : MonoBehaviour
 
     private void Jump() //NEW
     {
-        
         if((_coyoteTime > 0) && (_jumpRemember > 0) && !_isOnWall && !_canDoubleJump || isGrounded && !_canDoubleJump && inputManager.jumpInput)
         {
             CreateDust();
@@ -199,12 +197,17 @@ public class OfficialPlayerController : MonoBehaviour
             _isJumping = true;
             _canDoubleJump = true;
         }
+        //Double Jump
         else if (_canDoubleJump && inputManager.jumpInput)
         {
+            if (!unit.hasDoubleJump)
+            {
+                _canDoubleJump = false;
+                return;
+            }
             _player.velocity = new Vector2(_player.velocity.x, 0);
             _player.velocity = new Vector2(_player.velocity.x, jumpForce);
             _canDoubleJump = false;
-            Debug.Log(_canDoubleJump);
         }
 
         if (Input.GetButtonDown("Jump") && isGrounded)
@@ -285,7 +288,6 @@ public class OfficialPlayerController : MonoBehaviour
                 _animator.SetBool("IsOnWall", true);
             }
         }
-
     }
 
     private void OnTriggerStay2D(Collider2D col)
