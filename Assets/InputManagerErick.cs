@@ -7,6 +7,7 @@ public class InputManagerErick : MonoBehaviour
     public bool exitRollInput;
     public bool dashInput;
     public bool jumpInput;
+    public bool jumpingInput;
     public bool attackInput;
     public bool upInput;
     public bool downInput;
@@ -22,7 +23,8 @@ public class InputManagerErick : MonoBehaviour
         rollhInput = Input.GetKey(KeyCode.LeftControl);
         exitRollInput = Input.GetKey(KeyCode.LeftControl);
         dashInput = Input.GetKeyDown(KeyCode.LeftShift);
-        jumpInput = Input.GetButton("Jump"); //NEW
+        jumpingInput = Input.GetButton("Jump"); //NEW
+        jumpInput = Input.GetButtonDown("Jump");
         attackInput = Input.GetKeyDown(KeyCode.Mouse0);
         upInput = Input.GetKeyDown(KeyCode.W);
         downInput = Input.GetKeyDown(KeyCode.S);

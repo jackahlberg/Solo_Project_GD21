@@ -259,7 +259,9 @@ MonoBehaviour:
   _movementAcceleration: 5000
   _maxMoveSpeed: 12
   _linearDrag: 5
-  jumpForce: 20
+  jumpForce: 30
+  doubleJumpForce: 20
+  _canDoubleJump: 0
   _dashMultiplier: 100
   _dashShakeIntensity: 5
   _dashShakeDuration: 0.2
@@ -293,6 +295,7 @@ MonoBehaviour:
   exitRollInput: 0
   dashInput: 0
   jumpInput: 0
+  jumpingInput: 0
   attackInput: 0
   upInput: 0
   downInput: 0

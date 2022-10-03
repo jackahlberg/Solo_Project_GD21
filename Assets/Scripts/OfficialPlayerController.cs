@@ -33,7 +33,7 @@ public class OfficialPlayerController : MonoBehaviour
     private bool _isJumping = false; //NEW
     public float jumpForce = 8f;
     public float doubleJumpForce = 8f;
-    private bool _doubleJump;
+    public bool _canDoubleJump;
 
     [Header("Dash")]
     [SerializeField] private float _dashMultiplier;
@@ -164,7 +164,7 @@ public class OfficialPlayerController : MonoBehaviour
         }
 
         _jumpRemember -= Time.deltaTime;
-        if (Input.GetButtonDown("Jump") && isGrounded)
+        if (Input.GetButtonDown("Jump"))
         {
             _jumpRemember = _jumpRememberTime;
         }
@@ -190,40 +190,28 @@ public class OfficialPlayerController : MonoBehaviour
 
     private void Jump() //NEW
     {
-        if (isGrounded && !Input.GetButtonDown("Jump"))
-        {
-            _doubleJump = false;
-        }
         
-        if (inputManager.jumpInput && isGrounded)
+        if((_coyoteTime > 0) && (_jumpRemember > 0) && !_isOnWall && !_canDoubleJump || isGrounded && !_canDoubleJump && inputManager.jumpInput)
         {
             CreateDust();
             _player.velocity = new Vector2(_player.velocity.x, 0);
             _player.velocity = new Vector2(_player.velocity.x, jumpForce);
-            isGrounded = false;
             _isJumping = true;
+            _canDoubleJump = true;
         }
-        else if (_doubleJump && Input.GetButtonDown("Jump") && unit.hasDoubleJump)
+        else if (_canDoubleJump && inputManager.jumpInput)
         {
-            _player.velocity = new Vector2(_player.velocity.x, doubleJumpForce);
-        }
-
-        if ((_coyoteTime > 0) && (_jumpRemember > 0) && !_isOnWall)
-        {
+            _player.velocity = new Vector2(_player.velocity.x, 0);
             _player.velocity = new Vector2(_player.velocity.x, jumpForce);
+            _canDoubleJump = false;
+            Debug.Log(_canDoubleJump);
         }
 
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             CreateDust();
         }
-        
-        //Double Jump
-        /*else if (inputManager.jumpInput && _jumpCount == 1 && !_isOnWall)
-        {
-            _player.velocity = new Vector2(_player.velocity.x, doubleJumpForce);
-            _jumpCount = 0;
-        }*/
+ 
     }
     
     private void Flip()

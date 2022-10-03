@@ -29,7 +29,7 @@ public class BetterJumpErick : MonoBehaviour
         {
             _player.velocity += Vector2.up * Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
         }
-        else if (_player.velocity.y > 0 && !_inputManager.jumpInput)
+        else if (_player.velocity.y > 0 && !_inputManager.jumpingInput)
         {
             _player.velocity += Vector2.up * Physics.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
         }
