@@ -26,34 +26,37 @@ public class CurrencyEnum : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D col)
     {
-        switch (currencyAmount)
+        if (col.CompareTag("Player"))
         {
-            case CurrencyAmount.Coin:
-                _amount = 1;
-                break;
-            case CurrencyAmount.Diamond:
-                _amount = 1;
-                break;
-            case CurrencyAmount.BigCoin:
-                _amount = 5;
-                break;
-            case CurrencyAmount.BigDiamond:
-                _amount = 3;
-                break;
-        }
+            switch (currencyAmount)
+            {
+                case CurrencyAmount.Coin:
+                    _amount = 1;
+                    break;
+                case CurrencyAmount.Diamond:
+                    _amount = 1;
+                    break;
+                case CurrencyAmount.BigCoin:
+                    _amount = 5;
+                    break;
+                case CurrencyAmount.BigDiamond:
+                    _amount = 3;
+                    break;
+            }
 
-        switch (currencyType)
-        {
-            case CurrencyType.Coin:
-                break;
+            switch (currencyType)
+            {
+                case CurrencyType.Coin:
+                    break;
             
-            case CurrencyType.Diamond:
-                break;
+                case CurrencyType.Diamond:
+                    break;
+            }
+            
+            AdjustCurrencyAmount(_amount);
+        
+            Destroy(gameObject);
         }
-        
-        AdjustCurrencyAmount(_amount);
-        
-        Destroy(gameObject);
     }
     
     public void AdjustCurrencyAmount(int amount)
@@ -72,6 +75,4 @@ public class CurrencyEnum : MonoBehaviour
     {
         _playerCurrency = GameObject.FindWithTag("Player").GetComponent<CurrencyContainer>();
     }
-
-
 }
