@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
     private bool _hasWallJumped;
     private bool _isGliding;
     private float _rollInterpolator;
+    private bool _doubleJump;
     
     private bool _facingRight;
     [SerializeField] private GameObject weapon;
@@ -108,9 +109,10 @@ public class PlayerController : MonoBehaviour
         }
 
         _jumpRemember -= Time.deltaTime;
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump") && isGrounded)
         {
             _jumpRemember = _jumpRememberTime;
+            _doubleJump = true;
         }
     }
 
@@ -138,6 +140,12 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
+        
+        if (isGrounded && !Input.GetButton("Jump"))
+        {
+            _doubleJump = false;
+        }
+
         if (_player.velocity.y > 0)
         {
             _animator.SetFloat("JumpVelocity", 1);
@@ -146,23 +154,24 @@ public class PlayerController : MonoBehaviour
         {
             _animator.SetFloat("JumpVelocity", -1);
         }
-        
+
         if ((_coyoteTime > 0) && (_jumpRemember > 0) && !_isOnWall)
         {
             _player.velocity = new Vector2(_player.velocity.x, jumpForce);
         }
+        else if (_doubleJump && Input.GetButtonDown("Jump"))
+        {
+            _player.velocity = new Vector2(_player.velocity.x, jumpForce);
+
+            _doubleJump = false;
+        }
+
 
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             CreateDust();
         }
         
-        //Double Jump
-        /*else if (inputManager.jumpInput && _jumpCount == 1 && !_isOnWall)
-        {
-            _player.velocity = new Vector2(_player.velocity.x, doubleJumpForce);
-            _jumpCount = 0;
-        }*/
     }
 
     private void Flip()
@@ -220,6 +229,7 @@ public class PlayerController : MonoBehaviour
         {
             _player.velocity = new Vector2((dir.x * 2) * speed * 0.7f, jumpForce);
             _hasWallJumped = true;
+            _doubleJump = true;
             StartCoroutine(WallJumpTimer());
         }
     }
