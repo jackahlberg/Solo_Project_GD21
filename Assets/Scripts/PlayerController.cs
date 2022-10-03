@@ -160,10 +160,9 @@ public class PlayerController : MonoBehaviour
         {
             _player.velocity = new Vector2(_player.velocity.x, jumpForce);
         }
-        else if (_doubleJump && Input.GetButtonDown("Jump"))
+        else if (_doubleJump && Input.GetButtonDown("Jump") && unit.hasDoubleJump)
         {
             _player.velocity = new Vector2(_player.velocity.x, doubleJumpForce);
-
             _doubleJump = false;
         }
 
