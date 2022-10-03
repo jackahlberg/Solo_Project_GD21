@@ -9,6 +9,7 @@ public class UnitSO : ScriptableObject
         public bool hasWalk;
         public bool hasDash;
         public bool hasJump;
+        public bool hasDoubleJump;
         public bool hasGlide;
         public bool hasWallJump;
         public bool hasRoll;

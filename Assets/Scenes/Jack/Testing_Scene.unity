@@ -3808,7 +3808,7 @@ PrefabInstance:
     - target: {fileID: 2147538063370531094, guid: 2e24b7114d145084db7c6c9a976ecfbe, type: 3}
       propertyPath: unit
       value: 
-      objectReference: {fileID: 11400000, guid: dcbabe6aab8cf2b4eafc18fbf672f83a, type: 2}
+      objectReference: {fileID: 11400000, guid: 06826698eb7ae964c86d7f6924f0a342, type: 2}
     - target: {fileID: 2147538063370531094, guid: 2e24b7114d145084db7c6c9a976ecfbe, type: 3}
       propertyPath: roofCheckRadius
       value: -1

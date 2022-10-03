@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     
     public float speed = 8f;
     public float jumpForce = 8f;
+    public float doubleJumpForce = 8f;
     public float slideSpeed;
     public float glideSpeed;
     private bool _isOnWall;
@@ -161,7 +162,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (_doubleJump && Input.GetButtonDown("Jump"))
         {
-            _player.velocity = new Vector2(_player.velocity.x, jumpForce);
+            _player.velocity = new Vector2(_player.velocity.x, doubleJumpForce);
 
             _doubleJump = false;
         }
