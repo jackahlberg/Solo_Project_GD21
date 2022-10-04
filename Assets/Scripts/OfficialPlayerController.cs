@@ -273,6 +273,7 @@ public class OfficialPlayerController : MonoBehaviour
         {
             _player.velocity = new Vector2((dir.x * 2) * _maxMoveSpeed * 1.5f, jumpForce * 1.5f);
             _hasWallJumped = true;
+            _canDoubleJump = true;
             StartCoroutine(WallJumpTimer());
         }
     }
@@ -313,7 +314,7 @@ public class OfficialPlayerController : MonoBehaviour
         yield return new WaitForSeconds(0.25f);
         _isOnWall = false;
 
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(0.1f);
             
         _hasWallJumped = false;
     }
