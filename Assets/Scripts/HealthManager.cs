@@ -67,6 +67,8 @@ public class HealthManager : MonoBehaviour
             {
                 LoadScene.Respawn();
             }
+            
+            Debug.Log(Health);
         }
         else if (gameObject.CompareTag("Enemy"))
         {

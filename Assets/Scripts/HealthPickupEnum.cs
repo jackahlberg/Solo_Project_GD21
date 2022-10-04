@@ -31,8 +31,9 @@ public class HealthPickupEnum : MonoBehaviour
             }
 
             HealthManager healthManager = GameObject.FindWithTag("Player").GetComponent<HealthManager>();
-            
             healthManager.RegainHealth(_healAmount);
+            
+            Destroy(gameObject);
         }
     }
 }
