@@ -14,7 +14,6 @@ public class MeleeAttack : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private int damage;
     private HealthManager _health;
-    [SerializeField] private GameObject gold;
 
     public bool isAttacking;
     public float swingTimer;
@@ -30,7 +29,7 @@ public class MeleeAttack : MonoBehaviour
     {
         if (inputManager.attackInput && !isAttacking)
         {
-            isAttacking = true;   
+            isAttacking = true;
             weapon.SetActive(true);
             StartCoroutine(AttackTimer());
         }
@@ -48,8 +47,6 @@ public class MeleeAttack : MonoBehaviour
         if (col.CompareTag("Enemy"))
         {
             var enemy = DealDamage(col);
-
-            CheckHealth(enemy);
         }
     }
 
@@ -63,24 +60,5 @@ public class MeleeAttack : MonoBehaviour
         col.attachedRigidbody.AddForce(knockBack.normalized * -knockbackValue);
         rb.AddForce(knockBack.normalized * knockbackSelf);
         return enemy;
-    }
-
-    private void CheckHealth(GameObject enemy)
-    {
-        if (_health.Health <= 0)
-        {
-            var amount = Random.Range(1, 7);
-
-            for (int i = 0; i < amount; i++)
-            {
-                var direction = Random.Range((float) -120, 120);
-                var force = Random.Range(100, 300);
-                var spawnedGold = Instantiate(gold, enemy.transform.position, quaternion.identity);
-                spawnedGold.GetComponent<Rigidbody2D>().AddForce(new Vector2(direction, force));
-                Debug.Log(direction + " " + force + " " + amount);
-            }
-
-            Destroy(enemy);
-        }
     }
 }

@@ -7,11 +7,8 @@ using UnityEngine.SceneManagement;
 
 public class LoadScene : MonoBehaviour
 {
-    private void OnTriggerEnter2D(Collider2D col)
+    public static void Respawn()
     {
-        if (col.CompareTag("Player"))
-        {
-            SceneManager.LoadScene(0);
-        }
+        SceneManager.LoadScene("Testing_Scene");
     }
 }
