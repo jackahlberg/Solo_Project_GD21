@@ -20,8 +20,10 @@ public class EnemyCollision : MonoBehaviour
         {
             HealthManager healthManager = col.gameObject.GetComponent<HealthManager>();
             Rigidbody2D rb = col.gameObject.GetComponent<Rigidbody2D>();
-            healthManager.UpdateHealth(GetComponent<EnemyMelee>().damage);
-            
+            healthManager.DamageHealth(GetComponent<EnemyMelee>().damage);
+
+            EnemyMelee slowdown = GetComponent<EnemyMelee>();
+            StartCoroutine(slowdown.DamagedSlowDown());
             var knockBack = transform.position - col.transform.position;
             rb.AddForce(knockBack.normalized * -knockBackValue);
         }

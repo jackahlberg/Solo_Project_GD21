@@ -54,7 +54,7 @@ public class MeleeAttack : MonoBehaviour
     {
         GameObject enemy = col.gameObject;
         _health = col.gameObject.GetComponent<HealthManager>();
-        _health.UpdateHealth(damage);
+        _health.DamageHealth(damage);
 
         var knockBack = transform.position - col.transform.position;
         col.attachedRigidbody.AddForce(knockBack.normalized * -knockbackValue);

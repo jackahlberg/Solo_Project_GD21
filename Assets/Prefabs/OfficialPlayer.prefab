@@ -355,7 +355,6 @@ MonoBehaviour:
   inputManager: {fileID: 1202377156484622551}
   rb: {fileID: 2147538063370531092}
   damage: 1
-  gold: {fileID: 5437078027753912308, guid: 2a47d832c4589934fb86eb938ced8256, type: 3}
   isAttacking: 0
   swingTimer: 0.2
   knockbackValue: 1000
@@ -389,6 +388,8 @@ MonoBehaviour:
   maxHealth: 5
   cameraShakeIntensity: 5
   cameraShakeDuration: 0.2
+  invulnerableDuration: 1
+  coins: {fileID: 0}
 --- !u!1 &2147538063818326182
 GameObject:
   m_ObjectHideFlags: 0

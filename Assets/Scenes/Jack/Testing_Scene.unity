@@ -2973,10 +2973,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: OfficialPlayer
       objectReference: {fileID: 0}
-    - target: {fileID: 7095495637448252173, guid: 5a955e985abe1b24daae37e7601e2fbb, type: 3}
-      propertyPath: knockbackValue
-      value: 1000
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a955e985abe1b24daae37e7601e2fbb, type: 3}
@@ -3307,10 +3303,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy
       objectReference: {fileID: 0}
-    - target: {fileID: 7032753627964302680, guid: cb622334550467b4a8877b5de4ada570, type: 3}
-      propertyPath: knockBackValue
-      value: 3000
-      objectReference: {fileID: 0}
+    - target: {fileID: 7017251941663879736, guid: cb622334550467b4a8877b5de4ada570, type: 3}
+      propertyPath: coins
+      value: 
+      objectReference: {fileID: 5437078027753912308, guid: 2a47d832c4589934fb86eb938ced8256, type: 3}
     - target: {fileID: 7039686424900604300, guid: cb622334550467b4a8877b5de4ada570, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.010000229

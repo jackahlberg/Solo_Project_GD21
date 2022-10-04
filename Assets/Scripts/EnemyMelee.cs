@@ -36,18 +36,18 @@ public class EnemyMelee : MonoBehaviour
         if (col.CompareTag("Player"))
         {
             HealthManager playerHealth = col.gameObject.GetComponent<HealthManager>();
+            playerHealth.DamageHealth(damage);
             
-            playerHealth.UpdateHealth(damage);
-
-            Time.timeScale = 0.5f;
-
             StartCoroutine(DamagedSlowDown());
         }
     }
 
-    IEnumerator DamagedSlowDown()
+    public IEnumerator DamagedSlowDown()
     {
-        yield return new WaitForSeconds(0.25f);
+        
+        Time.timeScale = 0.001f;
+
+        yield return new WaitForSecondsRealtime(1);
 
         Time.timeScale = 1;
     }

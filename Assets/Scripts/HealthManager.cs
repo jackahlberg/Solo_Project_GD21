@@ -6,28 +6,26 @@ using Random = UnityEngine.Random;
 
 public class HealthManager : MonoBehaviour
 {
+    [Header("HEALTH")]
     [SerializeField] private int maxHealth;
     public int Health { get; private set; }
 
+    [Header("HIT FX")]
     [SerializeField] private float cameraShakeIntensity;
     [SerializeField] private float cameraShakeDuration;
-
     [SerializeField] private float invulnerableDuration;
-    private bool _isInvulnerable;
     
+    [Header("PICKUP DROP PREFABS")]
     [SerializeField] private GameObject coins;
+    
+    private bool _isInvulnerable;
 
     private void Start()
     {
         Health = maxHealth;
     }
 
-    private void Update()
-    {
-
-    }
-
-    public void UpdateHealth(int damage)
+    public void DamageHealth(int damage)
     {
         if (!_isInvulnerable)
         {
@@ -43,10 +41,16 @@ public class HealthManager : MonoBehaviour
         }
     }
 
+    public void RegainHealth(int healAmount)
+    {
+        Health += healAmount;
+        CheckHealth();
+    }
+
     IEnumerator InvulnerabilityTimer()
     {
         _isInvulnerable = true;
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(invulnerableDuration);
         _isInvulnerable = false;
     }
 
@@ -54,6 +58,11 @@ public class HealthManager : MonoBehaviour
     {
         if (gameObject.CompareTag("Player"))
         {
+            if (Health > maxHealth)
+            {
+                Health = maxHealth;
+            }
+            
             if (Health <= 0)
             {
                 LoadScene.Respawn();
@@ -76,7 +85,6 @@ public class HealthManager : MonoBehaviour
                 Destroy(gameObject);
             }
         }
-        
     }
 }
 
