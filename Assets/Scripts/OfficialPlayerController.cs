@@ -262,7 +262,7 @@ public class OfficialPlayerController : MonoBehaviour
         {
             _animator.SetBool("IsRolling",false);
             transform.localScale = new Vector3(11,11,1);
-            _maxMoveSpeed = moveSpeedTemp;
+            _maxMoveSpeed = 12f;
             _rollInterpolator = 0f;
         }
     }
@@ -271,7 +271,7 @@ public class OfficialPlayerController : MonoBehaviour
     {
         if (_isOnWall && Input.GetButtonDown("Jump") && _player.velocity.x < 0f || _isOnWall && Input.GetButtonDown("Jump") && 0f < _player.velocity.x)
         {
-            _player.velocity = new Vector2((dir.x * 2) * _maxMoveSpeed * 1.5f, jumpForce * 2f);
+            _player.velocity = new Vector2((dir.x * 2) * _maxMoveSpeed * 1.5f, jumpForce * 1.5f);
             _hasWallJumped = true;
             StartCoroutine(WallJumpTimer());
         }

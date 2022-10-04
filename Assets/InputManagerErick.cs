@@ -21,7 +21,7 @@ public class InputManagerErick : MonoBehaviour
     {
         walkInput = Input.GetAxisRaw("Horizontal");
         rollhInput = Input.GetKey(KeyCode.LeftControl);
-        exitRollInput = Input.GetKey(KeyCode.LeftControl);
+        exitRollInput = Input.GetKeyUp(KeyCode.LeftControl);
         dashInput = Input.GetKeyDown(KeyCode.LeftShift);
         jumpingInput = Input.GetButton("Jump"); //NEW
         jumpInput = Input.GetButtonDown("Jump");
