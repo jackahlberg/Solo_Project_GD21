@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Jack/DeflectionLevel.unity
     guid: 7ed708a177eb20e4797b07588e92e674
+  - enabled: 1
+    path: Assets/Scenes/Harry/SuperTiled_Test.unity
+    guid: eccce8e2700a7ed4ca379c4bffecc289
   m_configObjects: {}
