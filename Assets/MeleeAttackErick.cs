@@ -8,7 +8,8 @@ public class MeleeAttackErick : MonoBehaviour
     [SerializeField] private GameObject weapon;
     [SerializeField] private InputManagerErick inputManager;
     [SerializeField] private Rigidbody2D rb;
-    private HealthContainer _health;
+    private HealthManager _health;
+    [SerializeField] private int damage;
 
     public bool isAttacking;
     public float swingTimer;
@@ -20,7 +21,7 @@ public class MeleeAttackErick : MonoBehaviour
     {
         inputManager = gameObject.GetComponent<InputManagerErick>();
         rb = gameObject.GetComponent<Rigidbody2D>();
-        _health = gameObject.GetComponent<HealthContainer>();
+        _health = gameObject.GetComponent<HealthManager>();
     }
     
     //===============================================================
@@ -52,14 +53,14 @@ public class MeleeAttackErick : MonoBehaviour
         if (col.CompareTag("Enemy"))
         {
             GameObject enemy = col.gameObject;
-            _health = col.gameObject.GetComponent<HealthContainer>();
-            _health.health--;
+            _health = col.gameObject.GetComponent<HealthManager>();
+            _health.UpdateHealth(damage);
 
             var knockBack = transform.position - col.transform.position;
             col.attachedRigidbody.AddForce(knockBack.normalized * -knockbackValue);
             rb.AddForce(knockBack.normalized * knockbackSelf);
             
-            if (_health.health <= 0)
+            if (_health.Health <= 0)
             {
                 Destroy(enemy);
             }

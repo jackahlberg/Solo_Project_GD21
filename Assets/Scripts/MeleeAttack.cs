@@ -12,7 +12,8 @@ public class MeleeAttack : MonoBehaviour
     [SerializeField] private GameObject weapon;
     [SerializeField] private InputManagerErick inputManager;
     [SerializeField] private Rigidbody2D rb;
-    private HealthContainer _health;
+    [SerializeField] private int damage;
+    private HealthManager _health;
     [SerializeField] private GameObject gold;
 
     public bool isAttacking;
@@ -46,30 +47,40 @@ public class MeleeAttack : MonoBehaviour
     {
         if (col.CompareTag("Enemy"))
         {
-            GameObject enemy = col.gameObject;
-            _health = col.gameObject.GetComponent<HealthContainer>();
-            _health.health--;
+            var enemy = DealDamage(col);
 
-            var knockBack = transform.position - col.transform.position;
-            col.attachedRigidbody.AddForce(knockBack.normalized * -knockbackValue);
-            rb.AddForce(knockBack.normalized * knockbackSelf);
-            
-            if (_health.health <= 0)
+            CheckHealth(enemy);
+        }
+    }
+
+    private GameObject DealDamage(Collider2D col)
+    {
+        GameObject enemy = col.gameObject;
+        _health = col.gameObject.GetComponent<HealthManager>();
+        _health.UpdateHealth(damage);
+
+        var knockBack = transform.position - col.transform.position;
+        col.attachedRigidbody.AddForce(knockBack.normalized * -knockbackValue);
+        rb.AddForce(knockBack.normalized * knockbackSelf);
+        return enemy;
+    }
+
+    private void CheckHealth(GameObject enemy)
+    {
+        if (_health.Health <= 0)
+        {
+            var amount = Random.Range(1, 7);
+
+            for (int i = 0; i < amount; i++)
             {
-
-                var amount = Random.Range(1, 7);
-                
-                for (int i = 0; i < amount; i++)
-                {
-                    var direction = Random.Range((float)-120, 120);
-                    var force = Random.Range(100, 300);
-                    var spawnedGold = Instantiate(gold, enemy.transform.position, quaternion.identity);
-                    spawnedGold.GetComponent<Rigidbody2D>().AddForce(new Vector2(direction, force));
-                    Debug.Log(direction + " " + force + " " + amount);
-                }
-                
-                Destroy(enemy);
+                var direction = Random.Range((float) -120, 120);
+                var force = Random.Range(100, 300);
+                var spawnedGold = Instantiate(gold, enemy.transform.position, quaternion.identity);
+                spawnedGold.GetComponent<Rigidbody2D>().AddForce(new Vector2(direction, force));
+                Debug.Log(direction + " " + force + " " + amount);
             }
+
+            Destroy(enemy);
         }
     }
 }

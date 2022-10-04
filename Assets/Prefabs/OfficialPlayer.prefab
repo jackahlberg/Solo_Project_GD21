@@ -102,8 +102,9 @@ GameObject:
   - component: {fileID: -3105404439649561801}
   - component: {fileID: -2157748431733825308}
   - component: {fileID: 5685902834939132971}
-  - component: {fileID: 3232211987424831944}
   - component: {fileID: 7095495637448252173}
+  - component: {fileID: 918708240843508805}
+  - component: {fileID: 7291217461895103863}
   m_Layer: 0
   m_Name: OfficialPlayer
   m_TagString: Player
@@ -338,19 +339,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fallMultiplier: 10
   lowJumpMultiplier: 80
---- !u!114 &3232211987424831944
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2147538063370531103}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40e60108f9cc55e41bce1a1999dd5f52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 5
 --- !u!114 &7095495637448252173
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -366,11 +354,41 @@ MonoBehaviour:
   weapon: {fileID: 3724921029229731674}
   inputManager: {fileID: 1202377156484622551}
   rb: {fileID: 2147538063370531092}
+  damage: 1
   gold: {fileID: 5437078027753912308, guid: 2a47d832c4589934fb86eb938ced8256, type: 3}
   isAttacking: 0
   swingTimer: 0.2
-  knockbackValue: 500
+  knockbackValue: 1000
   knockbackSelf: 350
+--- !u!114 &918708240843508805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2147538063370531103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2084c93c2b545ff4f87b1687a73beb01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coins: 0
+  diamonds: 0
+--- !u!114 &7291217461895103863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2147538063370531103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40e60108f9cc55e41bce1a1999dd5f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 5
+  cameraShakeIntensity: 5
+  cameraShakeDuration: 0.2
 --- !u!1 &2147538063818326182
 GameObject:
   m_ObjectHideFlags: 0

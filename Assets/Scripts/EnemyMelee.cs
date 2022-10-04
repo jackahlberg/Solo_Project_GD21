@@ -12,6 +12,7 @@ public class EnemyMelee : MonoBehaviour
     [SerializeField] private SpriteRenderer color;
     public float swingTimer = 0.5f;
     public float anticipationTime = 1;
+    public int damage;
 
     public void Attack()
     {
@@ -34,8 +35,9 @@ public class EnemyMelee : MonoBehaviour
     {
         if (col.CompareTag("Player"))
         {
-            HealthContainer playerHealth = col.gameObject.GetComponent<HealthContainer>();
-            playerHealth.health--;
+            HealthManager playerHealth = col.gameObject.GetComponent<HealthManager>();
+            
+            playerHealth.UpdateHealth(damage);
 
             Time.timeScale = 0.5f;
 

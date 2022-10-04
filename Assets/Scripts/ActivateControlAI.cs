@@ -48,7 +48,6 @@ public class ActivateControlAI : MonoBehaviour
         {
             _inRange = true;
             cam.Follow = enemy;
-            cam.LookAt = enemy;
         }
     }
 
@@ -57,7 +56,6 @@ public class ActivateControlAI : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             cam.Follow = player;
-            cam.LookAt = player; 
             _inRange = false;
         }
     }

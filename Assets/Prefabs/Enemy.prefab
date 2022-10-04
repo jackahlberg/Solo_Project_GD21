@@ -212,6 +212,7 @@ GameObject:
   - component: {fileID: 9210442357258414201}
   - component: {fileID: 2420081940689300110}
   - component: {fileID: 7816399337139170440}
+  - component: {fileID: 7032753627964302680}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -369,7 +370,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40e60108f9cc55e41bce1a1999dd5f52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 3
+  maxHealth: 3
+  cameraShakeIntensity: 0
+  cameraShakeDuration: 0
 --- !u!114 &3898579885300098958
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -404,6 +407,7 @@ MonoBehaviour:
   color: {fileID: 5231347921235918646}
   swingTimer: 0.5
   anticipationTime: 1
+  damage: 1
 --- !u!198 &2420081940689300110
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -5185,3 +5189,16 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &7032753627964302680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5231347921235918648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f9b23647edeca74f8af7535f85fe12d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  knockBackValue: 7000
