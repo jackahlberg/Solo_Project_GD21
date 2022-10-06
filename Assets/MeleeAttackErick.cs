@@ -1,4 +1,4 @@
-using System;
+/*using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -60,10 +60,10 @@ public class MeleeAttackErick : MonoBehaviour
             col.attachedRigidbody.AddForce(knockBack.normalized * -knockbackValue);
             rb.AddForce(knockBack.normalized * knockbackSelf);
             
-            if (_health.Health <= 0)
+            if (_health._health <= 0)
             {
                 Destroy(enemy);
             }
         }
     }
-}
+}*/
