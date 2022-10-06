@@ -45,7 +45,7 @@ public class OfficialPlayerController : MonoBehaviour
     [SerializeField] private GameObject _weapon;
     private Rigidbody2D _player;
     private SpriteRenderer _spriteRenderer;
-    private BetterJumpErick _betterJump;
+    private BetterJump _betterJump;
 
     //ANIMATION
     private Animator _animator;
@@ -75,7 +75,7 @@ public class OfficialPlayerController : MonoBehaviour
     {
         _player = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        _betterJump = GetComponent<BetterJumpErick>();
+        _betterJump = GetComponent<BetterJump>();
         _animator = GetComponent<Animator>();
         _inputManager = GetComponent<InputManager>();
         _canDash = true;
@@ -172,7 +172,7 @@ public class OfficialPlayerController : MonoBehaviour
             return;
 
         //NEW MOVEMENT
-        _player.AddForce((dir * _movementAcceleration) * Time.deltaTime);
+        _player.AddForce(dir * (_movementAcceleration * Time.deltaTime));
         
         if (Mathf.Abs(_player.velocity.x) > _maxMoveSpeed)
             _player.velocity = new Vector2(Mathf.Sign(_player.velocity.x) * _maxMoveSpeed, _player.velocity.y);
