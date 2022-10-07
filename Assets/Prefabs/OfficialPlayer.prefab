@@ -98,13 +98,13 @@ GameObject:
   - component: {fileID: -4387044381236773618}
   - component: {fileID: 1617863663230134102}
   - component: {fileID: 3660083002217058359}
-  - component: {fileID: 1202377156484622551}
   - component: {fileID: -3105404439649561801}
   - component: {fileID: -2157748431733825308}
-  - component: {fileID: 5685902834939132971}
   - component: {fileID: 7095495637448252173}
   - component: {fileID: 918708240843508805}
-  - component: {fileID: 7291217461895103863}
+  - component: {fileID: 4168787479214096445}
+  - component: {fileID: 2184234808044609053}
+  - component: {fileID: 7190153098128351307}
   m_Layer: 0
   m_Name: OfficialPlayer
   m_TagString: Player
@@ -129,7 +129,7 @@ Transform:
   - {fileID: 4153810788018862461}
   - {fileID: 5663715184975286010}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2147538063370531090
 SpriteRenderer:
@@ -252,54 +252,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 343388f5f189c3b45870878c662abd67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unit: {fileID: 11400000, guid: 06826698eb7ae964c86d7f6924f0a342, type: 2}
+  Unit: {fileID: 11400000, guid: 06826698eb7ae964c86d7f6924f0a342, type: 2}
   _dust: {fileID: 6011017577504069226}
   _dashTrail: {fileID: 783376100516500024}
-  slideSpeed: 1
-  glideSpeed: 300
+  SlideSpeed: 8
+  GlideSpeed: 200
   _movementAcceleration: 5000
   _maxMoveSpeed: 12
-  _linearDrag: 5
-  jumpForce: 40
-  doubleJumpForce: 30
+  _linearDrag: 3
+  JumpForce: 16
+  DoubleJumpForce: 12
   _canDoubleJump: 0
   _dashMultiplier: 100
-  _dashShakeIntensity: 5
+  _dashShakeIntensity: 30
   _dashShakeDuration: 0.2
-  weapon: {fileID: 3724921029229731674}
-  groundCheck: {fileID: 0}
-  groundCheckRadius: 1.15
-  groundLayer:
+  _weapon: {fileID: 3724921029229731674}
+  GroundChecker: {fileID: 2147538063370531091}
+  GroundCheckRadius: 1.15
+  GroundLayer:
     serializedVersion: 2
     m_Bits: 64
-  roofLayer:
+  RoofLayer:
     serializedVersion: 2
     m_Bits: 128
-  isGrounded: 0
-  underRoof: 0
-  _groundedRememberTime: 0.15
-  _jumpRememberTime: 0.2
---- !u!114 &1202377156484622551
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2147538063370531103}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df5ba3dd0f4bf6c40968a8c634483c7f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  walkInput: 0
-  rollhInput: 0
-  exitRollInput: 0
-  dashInput: 0
-  jumpInput: 0
-  jumpingInput: 0
-  attackInput: 0
-  upInput: 0
-  downInput: 0
+  IsGrounded: 0
+  UnderRoof: 0
+  GroundedRememberTime: 0.2
+  JumpRememberTime: 0.15
 --- !u!114 &-3105404439649561801
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -324,21 +303,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4e3518088991f44a8e34bfd99cb5a56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  respawnPoint: {x: 0, y: 0, z: 0}
---- !u!114 &5685902834939132971
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2147538063370531103}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 074fd6cf9e68f514a8c0dfe4f49d748c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fallMultiplier: 10
-  lowJumpMultiplier: 80
+  RespawnPoint: {x: 0, y: 0, z: 0}
 --- !u!114 &7095495637448252173
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -351,14 +316,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfff4390dd5497a4cb4ecf890e9f1581, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapon: {fileID: 3724921029229731674}
-  inputManager: {fileID: 1202377156484622551}
-  rb: {fileID: 2147538063370531092}
-  damage: 1
-  isAttacking: 0
-  swingTimer: 0.2
-  knockbackValue: 1000
-  knockbackSelf: 350
+  _weapon: {fileID: 3724921029229731674}
+  _inputManager: {fileID: 4168787479214096445}
+  _rb: {fileID: 2147538063370531092}
+  _damage: 1
+  IsAttacking: 0
+  SwingTimer: 0.2
+  KnockbackValue: 500
+  KnockbackSelf: 350
 --- !u!114 &918708240843508805
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -371,9 +336,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2084c93c2b545ff4f87b1687a73beb01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coins: 0
-  diamonds: 0
---- !u!114 &7291217461895103863
+  Coins: 0
+  Diamonds: 0
+--- !u!114 &4168787479214096445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2147538063370531103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7fb3bec715fbcf49879422899f1a3af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  walkInput: 0
+  rollInput: 0
+  exitRollInput: 0
+  dashInput: 0
+  jumpInput: 0
+  jumpingInput: 0
+  attackInput: 0
+  upInput: 0
+  downInput: 0
+--- !u!114 &2184234808044609053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2147538063370531103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e098ab0fe33d3de46b96ec6d5fd49816, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FallMultiplier: 7
+  LowJumpMultiplier: 2
+--- !u!114 &7190153098128351307
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -385,11 +385,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40e60108f9cc55e41bce1a1999dd5f52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 5
-  cameraShakeIntensity: 5
-  cameraShakeDuration: 0.2
-  invulnerableDuration: 1
-  coins: {fileID: 0}
+  _maxHealth: 5
+  _cameraShakeIntensity: 7
+  _cameraShakeDuration: 1
+  _invulnerableDuration: 1
+  _coins: {fileID: 0}
 --- !u!1 &2147538063818326182
 GameObject:
   m_ObjectHideFlags: 0
@@ -435,7 +435,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 900c08532d501e24c8d78293db0f6c5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sprite: {fileID: 2147538063325225427}
+  ArrowSprite: {fileID: 0}
 --- !u!1 &3724921029229731674
 GameObject:
   m_ObjectHideFlags: 0

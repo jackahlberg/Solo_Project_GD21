@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c56086824022c24882e6d83fdc3c126, type: 3}
   m_Name: Enemy
   m_EditorClassIdentifier: 
-  name: Enemy
-  hasWalk: 1
-  hasDash: 0
-  hasJump: 1
-  hasGlide: 0
-  hasWallJump: 0
-  hasRoll: 0
+  Name: 
+  HasWalk: 1
+  HasDash: 0
+  HasJump: 1
+  HasDoubleJump: 0
+  HasGlide: 0
+  HasWallJump: 0
+  HasRoll: 0

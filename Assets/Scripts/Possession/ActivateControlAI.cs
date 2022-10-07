@@ -5,7 +5,7 @@ public class ActivateControlAI : MonoBehaviour
 {
     [SerializeField] private OfficialPlayerController playerController;
     [SerializeField] private Transform _playerPos;
-    [SerializeField] private PlayerController _controlledEnemy;
+    [SerializeField] private OfficialPlayerController _controlledEnemy;
     [SerializeField] private Transform _enemyPos;
     [SerializeField] private CinemachineVirtualCamera _cineCam;
     private Rigidbody2D _enemyRb;

@@ -192,7 +192,7 @@ public class OfficialPlayerController : MonoBehaviour
         }
         
         //Double Jump
-        else if (_canDoubleJump && _inputManager.jumpingInput)
+        else if (_canDoubleJump && _inputManager.jumpInput && !_isOnWall)
         {
             if (!Unit.HasDoubleJump)
             {

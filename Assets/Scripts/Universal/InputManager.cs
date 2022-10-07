@@ -6,7 +6,7 @@ public class InputManager : MonoBehaviour
     public bool rollInput;
     public bool exitRollInput;
     public bool dashInput;
-    public float jumpInput;
+    public bool jumpInput;
     public bool jumpingInput;
     public bool attackInput;
     public bool upInput;
@@ -22,8 +22,8 @@ public class InputManager : MonoBehaviour
         rollInput = Input.GetKey(KeyCode.LeftControl);
         exitRollInput = Input.GetKey(KeyCode.LeftControl);
         dashInput = Input.GetKeyDown(KeyCode.LeftShift);
-        jumpInput = Input.GetAxis("Vertical");
-        jumpingInput = Input.GetButton("Jump"); //NEW
+        jumpInput = Input.GetKeyDown(KeyCode.Space);
+        jumpingInput = Input.GetButton("Jump");
         attackInput = Input.GetKeyDown(KeyCode.Mouse0);
         upInput = Input.GetKeyDown(KeyCode.W);
         downInput = Input.GetKeyDown(KeyCode.S);

@@ -57,17 +57,17 @@ public class PlayerController : MonoBehaviour
     {
         var x = _inputManager.walkInput;
         var y = _inputManager.jumpInput;
-        var dir = new Vector2(x, y);
+        //var dir = new Vector2(x, y);
         
         SurfaceChecks();
         if (Unit.HasDash)
-            Dash(x, y);
+            //Dash(x, y);
         
         if (Unit.HasGlide)
             Glide();
         
         if (Unit.HasWalk)
-            Walk(dir);
+            //Walk(dir);
         
         if (Unit.HasJump)
             Jump();
@@ -76,7 +76,7 @@ public class PlayerController : MonoBehaviour
             Roll();
         
         if (Unit.HasWallJump)
-            WallJump(dir);
+            //WallJump(dir);
         
         Flip();
     }

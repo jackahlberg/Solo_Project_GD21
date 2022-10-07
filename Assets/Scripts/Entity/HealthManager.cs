@@ -25,7 +25,7 @@ public class HealthManager : MonoBehaviour
 
     
     private void Start() => _health = _maxHealth;
-    
+
 
     public void DamageHealth(int damage)
     {
@@ -33,10 +33,8 @@ public class HealthManager : MonoBehaviour
         {
             _health -= damage;
             VirtualMachineShake.Instance.CameraShake(_cameraShakeIntensity, _cameraShakeDuration);
-            Debug.Log(gameObject.name + _health);
             CheckHealth();
 
-            
             if (gameObject.CompareTag("Player"))
                 StartCoroutine(InvulnerabilityTimer());
         }
@@ -59,8 +57,6 @@ public class HealthManager : MonoBehaviour
         _isInvulnerable = false;
     }
 
-    
-    
     private void CheckHealth()
     {
         if (gameObject.CompareTag("Player"))
@@ -88,7 +84,6 @@ public class HealthManager : MonoBehaviour
                     var spawnedGold = Instantiate(_coins, transform.position, Quaternion.identity);
                     spawnedGold.GetComponent<Rigidbody2D>().AddForce(new Vector2(direction, force));
                 }
-                
                 Destroy(gameObject);
             }
         }

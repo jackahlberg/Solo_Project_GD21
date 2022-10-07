@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c56086824022c24882e6d83fdc3c126, type: 3}
   m_Name: PlayerNew
   m_EditorClassIdentifier: 
-  name: Player
-  hasWalk: 1
-  hasDash: 1
-  hasJump: 1
-  hasDoubleJump: 1
-  hasGlide: 1
-  hasWallJump: 1
-  hasRoll: 1
+  Name: 
+  HasWalk: 1
+  HasDash: 1
+  HasJump: 1
+  HasDoubleJump: 1
+  HasGlide: 1
+  HasWallJump: 1
+  HasRoll: 1
