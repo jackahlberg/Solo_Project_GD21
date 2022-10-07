@@ -3188,7 +3188,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.9431217, y: 1}
+    m_SensorSize: {x: 1.7777778, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -3576,12 +3576,24 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2060041521}
     - target: {fileID: 3660083002217058359, guid: 5a955e985abe1b24daae37e7601e2fbb, type: 3}
+      propertyPath: JumpRememberTime
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3660083002217058359, guid: 5a955e985abe1b24daae37e7601e2fbb, type: 3}
       propertyPath: RoofLayer.m_Bits
       value: 128
       objectReference: {fileID: 0}
     - target: {fileID: 3660083002217058359, guid: 5a955e985abe1b24daae37e7601e2fbb, type: 3}
+      propertyPath: GroundCheckRadius
+      value: 1.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3660083002217058359, guid: 5a955e985abe1b24daae37e7601e2fbb, type: 3}
       propertyPath: GroundLayer.m_Bits
       value: 64
+      objectReference: {fileID: 0}
+    - target: {fileID: 3660083002217058359, guid: 5a955e985abe1b24daae37e7601e2fbb, type: 3}
+      propertyPath: GroundedRememberTime
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 7095495637448252173, guid: 5a955e985abe1b24daae37e7601e2fbb, type: 3}
       propertyPath: _rb
