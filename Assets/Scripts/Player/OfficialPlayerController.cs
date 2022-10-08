@@ -87,8 +87,8 @@ public class OfficialPlayerController : MonoBehaviour
     private void Update()
     {
         var x = _inputManager.walkInput;
-        var y = Input.GetAxis("Vertical"); //NEW
-        var dir = new Vector2(x, 0);
+        var y = Input.GetAxis("Vertical");
+        var dir = new Vector2(x, y);
         
         SurfaceChecks();
         if (Unit.HasDash)
