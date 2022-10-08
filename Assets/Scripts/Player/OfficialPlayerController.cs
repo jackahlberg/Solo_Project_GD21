@@ -150,15 +150,11 @@ public class OfficialPlayerController : MonoBehaviour
             _coyoteTime = GroundedRememberTime;
         }
         else
-        {
             _animator.SetBool("IsGrounded", false);
-        }
 
         _jumpRemember -= Time.deltaTime;
         if (Input.GetButtonDown("Jump"))
-        {
             _jumpRemember = JumpRememberTime;
-        }
     }
 
     
@@ -172,7 +168,7 @@ public class OfficialPlayerController : MonoBehaviour
             return;
 
         //NEW MOVEMENT
-        _player.AddForce(dir * (_movementAcceleration * Time.deltaTime));
+        _player.AddForce((dir * _movementAcceleration) * Time.deltaTime);
         
         if (Mathf.Abs(_player.velocity.x) > _maxMoveSpeed)
             _player.velocity = new Vector2(Mathf.Sign(_player.velocity.x) * _maxMoveSpeed, _player.velocity.y);
@@ -216,6 +212,7 @@ public class OfficialPlayerController : MonoBehaviour
         {
             if(IsGrounded)
                 CreateDust();
+            
             _facingRight = !_facingRight;
             _spriteRenderer.flipX = false;
             _weapon.transform.localPosition = new Vector2(0.2f, 0);

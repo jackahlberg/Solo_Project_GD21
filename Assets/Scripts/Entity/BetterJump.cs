@@ -16,19 +16,18 @@ public class BetterJump : MonoBehaviour
         _inputManager = GetComponent<InputManager>();
     }
 
-    
-    
+
+
     private void Update() => JumpGravity();
 
-    
-    
+
+
     private void JumpGravity()
     {
-        //NEW
         if (_rb.velocity.y < 0)
-            _rb.velocity += Vector2.up * (Physics.gravity.y * (FallMultiplier - 1) * Time.deltaTime);
-        
-        else if (_rb.velocity.y > 0 && !_inputManager.jumpingInput)
-            _rb.velocity += Vector2.up * (Physics.gravity.y * (LowJumpMultiplier - 1) * Time.deltaTime);
+            _rb.velocity += Vector2.up * Physics.gravity.y * (FallMultiplier - 1) * Time.deltaTime;
+
+        else if (_rb.velocity.y > 0 && !_inputManager.jumpInput);
+            _rb.velocity += Vector2.up * Physics.gravity.y * (LowJumpMultiplier - 1) * Time.deltaTime;
     }
 }
