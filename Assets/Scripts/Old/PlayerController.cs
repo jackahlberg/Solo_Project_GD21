@@ -56,7 +56,7 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         var x = _inputManager.HorizontalInput;
-        var y = _inputManager.jumpDownInput;
+        var y = _inputManager.JumpDown;
         //var dir = new Vector2(x, y);
         
         SurfaceChecks();
@@ -180,7 +180,7 @@ public class PlayerController : MonoBehaviour
             weapon.transform.localScale = new Vector3(0.35f, 0.05f);
         }
         
-        else if (_inputManager.upInput)
+        else if (_inputManager.UpwardsDown)
         {
             weapon.transform.localScale = new Vector3(0.05f, 0.35f);
             weapon.transform.localPosition = new Vector3(0f, 0.15f);
@@ -191,7 +191,7 @@ public class PlayerController : MonoBehaviour
     
     private void Roll()
     {
-        if (_inputManager.rollInput && IsGrounded)
+        if (_inputManager.IsRolling && IsGrounded)
         {
             _animator.SetBool("IsRolling",true);
             transform.localScale = new Vector3(9f, 9f, 1);
@@ -202,7 +202,7 @@ public class PlayerController : MonoBehaviour
             }
 
         }
-        else if (!_inputManager.exitRollInput && !UnderRoof || _isOnWall)
+        else if (!_inputManager.HasExitedRoll && !UnderRoof || _isOnWall)
         {
             _animator.SetBool("IsRolling",false);
             transform.localScale = new Vector3(11,11,1);
@@ -275,7 +275,7 @@ public class PlayerController : MonoBehaviour
     
     private void Dash(float x, float y)
     {
-        if (_inputManager.dashInput && _canDash)
+        if (_inputManager.DashDown && _canDash)
         {
             _rb.velocity = Vector2.zero;
             Vector2 dir = new Vector2(x, y);

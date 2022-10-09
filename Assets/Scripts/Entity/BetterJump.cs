@@ -26,7 +26,7 @@ public class BetterJump : MonoBehaviour
         if (_rb.velocity.y < 0)
             _rb.velocity += Vector2.up * Physics.gravity.y * (FallMultiplier - 1) * Time.deltaTime;
 
-        else if (_rb.velocity.y > 0 && !_inputManager.isJumping);
+        else if (_rb.velocity.y > 0 && !_inputManager.IsJumping);
             _rb.velocity += Vector2.up * Physics.gravity.y * (LowJumpMultiplier - 1) * Time.deltaTime;
     }
 }

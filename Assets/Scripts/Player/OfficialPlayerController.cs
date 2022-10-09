@@ -178,7 +178,7 @@ public class OfficialPlayerController : MonoBehaviour
     
     private void Jump() //NEW
     {
-        if((_coyoteTime > 0) && (_jumpRemember > 0) && !_isOnWall && !_canDoubleJump || IsGrounded && !_canDoubleJump && _inputManager.isJumping)
+        if((_coyoteTime > 0) && (_jumpRemember > 0) && !_isOnWall && !_canDoubleJump || IsGrounded && !_canDoubleJump && _inputManager.IsJumping)
         {
             CreateDust();
             _player.velocity = new Vector2(_player.velocity.x, 0);
@@ -188,7 +188,7 @@ public class OfficialPlayerController : MonoBehaviour
         }
         
         //Double Jump
-        else if (_canDoubleJump && _inputManager.isJumping && !_isOnWall)
+        else if (_canDoubleJump && _inputManager.IsJumping && !_isOnWall)
         {
             if (!Unit.HasDoubleJump)
             {
@@ -229,7 +229,7 @@ public class OfficialPlayerController : MonoBehaviour
             _weapon.transform.localScale = new Vector3(0.35f, 0.05f);
         }
         
-        else if (_inputManager.upInput)
+        else if (_inputManager.UpwardsDown)
         {
             _weapon.transform.localScale = new Vector3(0.05f, 0.35f);
             _weapon.transform.localPosition = new Vector3(0f, 0.15f);
@@ -241,7 +241,7 @@ public class OfficialPlayerController : MonoBehaviour
     private void Roll()
     {
         var moveSpeedTemp = _maxMoveSpeed;
-        if (_inputManager.rollInput && IsGrounded)
+        if (_inputManager.IsRolling && IsGrounded)
         {
             _animator.SetBool("IsRolling",true);
             transform.localScale = new Vector3(9f, 9f, 1);
@@ -252,7 +252,7 @@ public class OfficialPlayerController : MonoBehaviour
             }
         }
         
-        else if (!_inputManager.exitRollInput && !UnderRoof || _isOnWall)
+        else if (!_inputManager.HasExitedRoll && !UnderRoof || _isOnWall)
         {
             _animator.SetBool("IsRolling",false);
             transform.localScale = new Vector3(11,11,1);
@@ -324,7 +324,7 @@ public class OfficialPlayerController : MonoBehaviour
     
     private void Dash(float x, float y)
     {
-        if (_inputManager.dashInput && _canDash)
+        if (_inputManager.DashDown && _canDash)
         {
             //FEEDBACK
             CreateDashTrail();

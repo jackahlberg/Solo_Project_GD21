@@ -4,14 +4,14 @@ public class InputManager : MonoBehaviour
 {
     public float HorizontalInput;
     public float VerticalInput;
-    public bool rollInput;
-    public bool exitRollInput;
-    public bool dashInput;
-    public bool jumpDownInput;
-    public bool isJumping;
-    public bool attackInput;
-    public bool upInput;
-    public bool downInput;
+    public bool IsRolling;
+    public bool HasExitedRoll;
+    public bool DashDown;
+    public bool JumpDown;
+    public bool IsJumping;
+    public bool AttackDown;
+    public bool UpwardsDown;
+    public bool DownwardsDown;
 
 
     private void Update() => GetInput();
@@ -21,13 +21,13 @@ public class InputManager : MonoBehaviour
     {
         HorizontalInput = Input.GetAxisRaw("Horizontal");
         VerticalInput = Input.GetAxisRaw("Vertical");
-        rollInput = Input.GetKey(KeyCode.LeftControl);
-        exitRollInput = Input.GetKey(KeyCode.LeftControl);
-        dashInput = Input.GetKeyDown(KeyCode.LeftShift);
-        jumpDownInput = Input.GetButtonDown("Jump");
-        isJumping = Input.GetButton("Jump");
-        attackInput = Input.GetKeyDown(KeyCode.Mouse0);
-        upInput = Input.GetKeyDown(KeyCode.W);
-        downInput = Input.GetKeyDown(KeyCode.S);
+        IsRolling = Input.GetKey(KeyCode.LeftControl);
+        HasExitedRoll = Input.GetKeyUp(KeyCode.LeftControl);
+        DashDown = Input.GetKeyDown(KeyCode.LeftShift);
+        JumpDown = Input.GetButtonDown("Jump");
+        IsJumping = Input.GetButton("Jump");
+        AttackDown = Input.GetKeyDown(KeyCode.Mouse0);
+        UpwardsDown = Input.GetKeyDown(KeyCode.W);
+        DownwardsDown = Input.GetKeyDown(KeyCode.S);
     }
 }

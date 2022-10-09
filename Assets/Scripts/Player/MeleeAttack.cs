@@ -20,7 +20,7 @@ public class MeleeAttack : MonoBehaviour
 
     private void Attack()
     {
-        if (_inputManager.attackInput && !IsAttacking)
+        if (_inputManager.AttackDown && !IsAttacking)
         {
             IsAttacking = true;
             _weapon.SetActive(true);
