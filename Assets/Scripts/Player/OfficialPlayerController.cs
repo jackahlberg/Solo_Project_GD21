@@ -86,8 +86,8 @@ public class OfficialPlayerController : MonoBehaviour
     
     private void Update()
     {
-        var x = _inputManager.walkInput;
-        var y = Input.GetAxis("Vertical");
+        var x = _inputManager.HorizontalInput;
+        var y = _inputManager.VerticalInput;
         var dir = new Vector2(x, y);
         
         SurfaceChecks();
@@ -121,7 +121,7 @@ public class OfficialPlayerController : MonoBehaviour
         if (IsGrounded)
         {
             _isJumping = false;
-            if (_inputManager.walkInput != 0)
+            if (_inputManager.HorizontalInput != 0)
                 ChangeAnimationState(PlayerWalk);
             else
                 ChangeAnimationState(PlayerIdle);
@@ -178,7 +178,7 @@ public class OfficialPlayerController : MonoBehaviour
     
     private void Jump() //NEW
     {
-        if((_coyoteTime > 0) && (_jumpRemember > 0) && !_isOnWall && !_canDoubleJump || IsGrounded && !_canDoubleJump && _inputManager.jumpingInput)
+        if((_coyoteTime > 0) && (_jumpRemember > 0) && !_isOnWall && !_canDoubleJump || IsGrounded && !_canDoubleJump && _inputManager.isJumping)
         {
             CreateDust();
             _player.velocity = new Vector2(_player.velocity.x, 0);
@@ -188,7 +188,7 @@ public class OfficialPlayerController : MonoBehaviour
         }
         
         //Double Jump
-        else if (_canDoubleJump && _inputManager.jumpInput && !_isOnWall)
+        else if (_canDoubleJump && _inputManager.isJumping && !_isOnWall)
         {
             if (!Unit.HasDoubleJump)
             {
@@ -208,7 +208,7 @@ public class OfficialPlayerController : MonoBehaviour
     
     private void Flip()
     {
-        if (_inputManager.walkInput > 0f && _facingRight)
+        if (_inputManager.HorizontalInput > 0f && _facingRight)
         {
             if(IsGrounded)
                 CreateDust();
@@ -219,7 +219,7 @@ public class OfficialPlayerController : MonoBehaviour
             _weapon.transform.localScale = new Vector3(0.35f, 0.05f);
         }
         
-        else if (_inputManager.walkInput < 0f && !_facingRight)
+        else if (_inputManager.HorizontalInput < 0f && !_facingRight)
         {
             if(IsGrounded)
                 CreateDust();

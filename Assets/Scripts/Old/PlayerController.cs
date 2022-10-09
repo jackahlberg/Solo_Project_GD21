@@ -55,8 +55,8 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        var x = _inputManager.walkInput;
-        var y = _inputManager.jumpInput;
+        var x = _inputManager.HorizontalInput;
+        var y = _inputManager.jumpDownInput;
         //var dir = new Vector2(x, y);
         
         SurfaceChecks();
@@ -160,7 +160,7 @@ public class PlayerController : MonoBehaviour
     
     private void Flip()
     {
-        if (_inputManager.walkInput > 0f && _facingRight)
+        if (_inputManager.HorizontalInput > 0f && _facingRight)
         {
             if(IsGrounded)
                 CreateDust();
@@ -170,7 +170,7 @@ public class PlayerController : MonoBehaviour
             weapon.transform.localScale = new Vector3(0.35f, 0.05f);
         }
         
-        else if (_inputManager.walkInput < 0f && !_facingRight)
+        else if (_inputManager.HorizontalInput < 0f && !_facingRight)
         {
             if(IsGrounded)
                 CreateDust();
