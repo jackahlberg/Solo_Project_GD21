@@ -188,7 +188,7 @@ public class OfficialPlayerController : MonoBehaviour
         }
         
         //Double Jump
-        else if (_canDoubleJump && _inputManager.IsJumping && !_isOnWall)
+        else if (_canDoubleJump && _inputManager.JumpDown && !_isOnWall)
         {
             if (!Unit.HasDoubleJump)
             {
