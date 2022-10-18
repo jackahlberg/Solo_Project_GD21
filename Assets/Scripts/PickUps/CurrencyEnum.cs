@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class CurrencyEnum : MonoBehaviour
 {
-    private CurrencyContainer _playerCurrency;
+    private CurrencyManager _playerCurrency;
     private int _amount;
     private enum CurrencyAmount
     {
@@ -18,7 +18,7 @@ public class CurrencyEnum : MonoBehaviour
     [SerializeField] private CurrencyType _currencyType;
 
 
-    private void Start() => _playerCurrency = GameObject.FindWithTag("Player").GetComponent<CurrencyContainer>();
+    private void Start() => _playerCurrency = GameObject.FindWithTag("Player").GetComponent<CurrencyManager>();
 
     
     private void OnCollisionEnter2D(Collision2D col)
