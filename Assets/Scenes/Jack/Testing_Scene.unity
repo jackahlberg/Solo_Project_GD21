@@ -1402,11 +1402,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6362648390999953737, guid: e0c00007f885f874597f9e78ac3fdd2a, type: 3}
   m_PrefabInstance: {fileID: 70548491}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &682700880 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2147538063370531103, guid: 5a955e985abe1b24daae37e7601e2fbb, type: 3}
-  m_PrefabInstance: {fileID: 1590319277}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &700855953 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7368901108794208453, guid: b9c9e0b48807418459b2dab248725db4, type: 3}
@@ -3582,6 +3577,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: OfficialPlayer
       objectReference: {fileID: 0}
+    - target: {fileID: 3660083002217058359, guid: 5a955e985abe1b24daae37e7601e2fbb, type: 3}
+      propertyPath: _movementAcceleration
+      value: 7000
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a955e985abe1b24daae37e7601e2fbb, type: 3}
@@ -4810,7 +4809,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3660083002217058359, guid: 5a955e985abe1b24daae37e7601e2fbb, type: 3}
   m_PrefabInstance: {fileID: 1590319277}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 682700880}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 343388f5f189c3b45870878c662abd67, type: 3}
@@ -4821,20 +4820,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2147538063370531091, guid: 5a955e985abe1b24daae37e7601e2fbb, type: 3}
   m_PrefabInstance: {fileID: 1590319277}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2060041533
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 682700880}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25f2cd98f078f2941bfe87c8144fbb8f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lookPos: {fileID: 1539456453}
-  player: {fileID: 0}
 --- !u!1001 &5437078028596939404
 PrefabInstance:
   m_ObjectHideFlags: 0

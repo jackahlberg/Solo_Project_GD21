@@ -20,7 +20,7 @@ public class InputManager : MonoBehaviour
     private void GetInput()
     {
         HorizontalInput = Input.GetAxisRaw("Horizontal");
-        VerticalInput = Input.GetAxisRaw("Vertical");
+        //VerticalInput = Input.GetAxisRaw("Vertical");
         IsRolling = Input.GetKey(KeyCode.LeftControl);
         HasExitedRoll = Input.GetKeyUp(KeyCode.LeftControl);
         DashDown = Input.GetKeyDown(KeyCode.LeftShift);
