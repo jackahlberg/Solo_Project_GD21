@@ -58,9 +58,7 @@ public class CurrencyEnum : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    
-    
-    
+
     public void AdjustCurrencyAmount(int amount)
     {
         if (_currencyType == CurrencyType.Coin)
