@@ -25,12 +25,12 @@ public class LookDownCamera : MonoBehaviour
 
     private void LookDown()
     {
-        if (_rb.velocity.x >= 0.2 && _rb.velocity.y < 0.2 && Input.GetKey(KeyCode.S))
+        if (_rb.velocity.magnitude < 0.08f && Input.GetKey(KeyCode.S))
         {
             _cinemachineVirtualCamera.Follow = lookPos;
             _lookingDown = true;
         }
-        else if(_lookingDown && !Input.GetKey(KeyCode.S))
+        else if(_lookingDown && _rb.velocity.magnitude > 3f || _lookingDown && !Input.GetKey(KeyCode.S))
         {
             _cinemachineVirtualCamera.Follow = player;
             _lookingDown = false;

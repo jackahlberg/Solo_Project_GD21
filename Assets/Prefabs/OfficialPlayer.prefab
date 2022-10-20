@@ -289,7 +289,7 @@ MonoBehaviour:
   _dashTrail: {fileID: 783376100516500024}
   SlideSpeed: 1
   GlideSpeed: 300
-  _movementAcceleration: 5000
+  _movementAcceleration: 12000
   _maxMoveSpeed: 12
   _linearDrag: 3
   JumpForce: 24

@@ -3577,9 +3577,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: OfficialPlayer
       objectReference: {fileID: 0}
-    - target: {fileID: 3660083002217058359, guid: 5a955e985abe1b24daae37e7601e2fbb, type: 3}
-      propertyPath: _movementAcceleration
-      value: 7000
+    - target: {fileID: 3683373067612769477, guid: 5a955e985abe1b24daae37e7601e2fbb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.90909094
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
