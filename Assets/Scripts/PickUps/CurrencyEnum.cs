@@ -9,7 +9,7 @@ public class CurrencyEnum : MonoBehaviour
         Coin, BigCoin, Diamond, BigDiamond
     }
     
-    public enum CurrencyType
+    private enum CurrencyType
     {
         Coin, Diamond
     }

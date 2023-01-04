@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c56086824022c24882e6d83fdc3c126, type: 3}
   m_Name: PlayerNew
   m_EditorClassIdentifier: 
-  Name: 
+  Name: Player
   HasWalk: 1
   HasDash: 1
   HasJump: 1
