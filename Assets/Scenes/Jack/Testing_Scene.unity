@@ -1525,6 +1525,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3212147472894417022, guid: dc65b8465c27d9d4681888a61a441634, type: 3}
+      propertyPath: m_text
+      value: +1 Health
+      objectReference: {fileID: 0}
+    - target: {fileID: 3212147473863549367, guid: dc65b8465c27d9d4681888a61a441634, type: 3}
+      propertyPath: m_text
+      value: Double Jump
+      objectReference: {fileID: 0}
     - target: {fileID: 3212147474356437136, guid: dc65b8465c27d9d4681888a61a441634, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -1590,11 +1598,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5862992334433646939, guid: a81103206a3b98048a0c8113abc3c38a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 45
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 5862992334433646939, guid: a81103206a3b98048a0c8113abc3c38a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 39.26
+      value: 16.23
       objectReference: {fileID: 0}
     - target: {fileID: 5862992334433646939, guid: a81103206a3b98048a0c8113abc3c38a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4030,10 +4038,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e197c314566bca4d82b62b6605fd935, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  price: 40
-  type: 0
+  price: 50
+  type: 3
   healAmount: 0
-  abilityType: 0
+  abilityType: 1
 --- !u!1001 &1838100887
 PrefabInstance:
   m_ObjectHideFlags: 0

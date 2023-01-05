@@ -67,11 +67,8 @@ public class ShopUI : MonoBehaviour
         }
     }
 
-    private void OnCollisionExit2D(Collision2D other)
+    private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            _inRange = false;
-        }
+        _inRange = false;
     }
 }
