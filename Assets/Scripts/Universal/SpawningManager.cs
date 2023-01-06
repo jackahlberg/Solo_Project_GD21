@@ -8,6 +8,8 @@ public class SpawningManager : MonoBehaviour
 {
     private GameObject _player;
     private Transform _spawnPoint;
+    public StatsSO[] StatsSos;
+    public int SOIndex;
 
     private void Awake()
     {

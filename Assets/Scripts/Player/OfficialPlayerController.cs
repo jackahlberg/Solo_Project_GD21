@@ -9,6 +9,7 @@ public class OfficialPlayerController : MonoBehaviour
     private InputManager _inputManager;
     public UnitSO Unit;
     public StatsSO Stats;
+    public SpawningManager statChoice; //Might remove this
 
     [SerializeField] private ParticleSystem _dust;
     [SerializeField] private ParticleSystem _dashTrail;
@@ -82,7 +83,9 @@ public class OfficialPlayerController : MonoBehaviour
         _inputManager = GetComponent<InputManager>();
         _canDash = true;
         GroundChecker = gameObject.GetComponent<Transform>(); //NEW
-
+        
+        Stats = statChoice.StatsSos[statChoice.SOIndex];
+        
         JumpForce = Stats.jumpForce;
         DoubleJumpForce = Stats.doubleJumpForce;
         _dashMultiplier = Stats.dashMultiplier;
