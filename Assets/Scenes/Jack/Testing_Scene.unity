@@ -3818,6 +3818,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: OfficialPlayer
       objectReference: {fileID: 0}
+    - target: {fileID: 2184234808044609053, guid: 5a955e985abe1b24daae37e7601e2fbb, type: 3}
+      propertyPath: FallMultiplier
+      value: 2.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3683373067612769477, guid: 5a955e985abe1b24daae37e7601e2fbb, type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.90909094

@@ -292,7 +292,7 @@ MonoBehaviour:
   _movementAcceleration: 12000
   _maxMoveSpeed: 12
   _linearDrag: 3
-  JumpForce: 24
+  JumpForce: 28
   DoubleJumpForce: 18
   _canDoubleJump: 0
   _dashMultiplier: 100
@@ -404,7 +404,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e098ab0fe33d3de46b96ec6d5fd49816, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FallMultiplier: 7
+  FallMultiplier: 2.5
   LowJumpMultiplier: 2
 --- !u!114 &7190153098128351307
 MonoBehaviour:

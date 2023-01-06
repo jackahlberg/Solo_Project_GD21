@@ -63,8 +63,8 @@ public class OfficialPlayerController : MonoBehaviour
     public float GroundCheckRadius;
     public LayerMask GroundLayer;
     public LayerMask RoofLayer;
-    public bool IsGrounded;
-    public bool UnderRoof;
+    [HideInInspector] public bool IsGrounded;
+    [HideInInspector] public bool UnderRoof;
     public float GroundedRememberTime;
     private float _coyoteTime;
     public float JumpRememberTime;
