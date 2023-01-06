@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class SpawningManager : MonoBehaviour
 {
@@ -16,8 +17,12 @@ public class SpawningManager : MonoBehaviour
 
     private void Start()
     {
+        SpawnPlayer();
+    }
+
+    public void SpawnPlayer()
+    {
         _player.transform.position = _spawnPoint.position;
-        Destroy(this);
     }
 
 }

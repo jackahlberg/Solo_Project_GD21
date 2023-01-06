@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
@@ -7,6 +8,7 @@ public class OfficialPlayerController : MonoBehaviour
 {
     private InputManager _inputManager;
     public UnitSO Unit;
+    public StatsSO Stats;
 
     [SerializeField] private ParticleSystem _dust;
     [SerializeField] private ParticleSystem _dashTrail;
@@ -80,6 +82,11 @@ public class OfficialPlayerController : MonoBehaviour
         _inputManager = GetComponent<InputManager>();
         _canDash = true;
         GroundChecker = gameObject.GetComponent<Transform>(); //NEW
+
+        JumpForce = Stats.jumpForce;
+        DoubleJumpForce = Stats.doubleJumpForce;
+        _dashMultiplier = Stats.dashMultiplier;
+        _maxMoveSpeed = Stats.movementSpeed;
     }
 
     
